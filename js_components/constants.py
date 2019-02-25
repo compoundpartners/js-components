@@ -10,5 +10,5 @@ HIDE_PROMO = getattr(
 PROMO_LAYOUTS = getattr(
     settings,
     'COMPONENTS_PROMO_LAYOUTS',
-    [],
+    (),
 )

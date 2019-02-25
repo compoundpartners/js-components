@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from . import models
 from .constants import PROMO_LAYOUTS
 
-LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_').join(['', '.html']), PROMO_LAYOUTS)), PROMO_LAYOUTS)
+LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + PROMO_LAYOUTS)), ('default',) + PROMO_LAYOUTS)
 
 
 class PromoUnitForm(forms.ModelForm):
