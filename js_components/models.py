@@ -10,6 +10,14 @@ from djangocms_text_ckeditor.fields import HTMLField
 from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
+from twython import Twython, TwythonError
+from dateutil.parser import parse
+from .constants import (
+    TWITTER_APP_KEY,
+    TWITTER_APP_SECRET,
+    TWITTER_OAUTH_TOKEN,
+    TWITTER_OAUTH_SECRET
+)
 
 
 @python_2_unicode_compatible
@@ -65,3 +73,120 @@ class PromoUnit(CMSPlugin):
 
     def __str__(self):
         return self.title
+
+
+@python_2_unicode_compatible
+class TwitterFeed(CMSPlugin):
+    title = models.CharField(
+        max_length=255,
+        verbose_name=_('Title'),
+        blank=True,
+        null=True,
+    )
+    username = models.CharField(
+        max_length=255,
+        verbose_name=_('twitter username')
+    )
+    count = models.IntegerField(
+        default=3,
+        verbose_name=_('number of tweets to show')
+    )
+    followers = models.IntegerField(
+        editable=False,
+        null=True
+    )
+    image = FilerImageField(
+        verbose_name=_('Image'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout')
+    )
+
+    def __str__(self):
+        return self.username
+
+    def tweets(self):
+        return self.tweetcache_set.all().order_by('-date')[:self.count]
+
+    def get_latest_twitter_data(self):
+
+        twitter = Twython(
+            app_key=TWITTER_APP_KEY,
+            app_secret=TWITTER_APP_SECRET,
+            oauth_token=TWITTER_OAUTH_TOKEN,
+            oauth_token_secret=TWITTER_OAUTH_SECRET
+        )
+
+        try:
+            # count is number of tweets, including RTs and replies, so we get
+            # ten times as many so that we can then reduce down to the
+            # requested count.
+            timeline = twitter.get_user_timeline(
+                screen_name=self.username,
+                count=self.count * 10,
+                include_entities=True,
+                include_rts=False,
+                exclude_replies=True
+            )
+        except TwythonError:
+            return {'tweets': [], 'followers': 0}
+
+        tweets = []
+        for t in timeline:
+            d = parse(t["created_at"], ignoretz=True)
+
+            text = Twython.html_for_tweet(t)
+
+            # Process images into links
+            # Twython's html_for_tweet function doesn't handle these.
+            try:
+                for url in t['entities']['media']:
+                    html_link = '<a href="' + \
+                        '%s" rel="nofollow" target="_blank">%s</a>' % (
+                            url['expanded_url'], url['display_url'])
+                    text = text.replace(url['url'], html_link)
+            except KeyError:
+                pass
+
+            # strip out manual RTs
+            if text[0:2] != 'RT':
+                tweets.append({'date': d, 'text': text})
+
+        if tweets:
+            return {
+                'tweets': tweets,
+                'followers': t['user']['followers_count']
+            }
+        else:
+            return {'tweets': [], 'followers': 0}
+
+    # we update the cache separately (also makes saving follower count into
+    # self model easier.
+
+    def update_cache(self, tweets):
+        TweetCache.objects.filter(plugin_instance=self).delete()
+
+        for t in tweets:
+            tc = TweetCache(
+                plugin_instance=self, text=t['text'], date=t['date'])
+            tc.save()
+
+    def save(self):
+        data = self.get_latest_twitter_data()
+        self.followers = data['followers']
+        super(TwitterFeed, self).save()
+        if len(data['tweets']) and any([t['text'] for t in data['tweets']]):
+            self.update_cache(data['tweets'])
+
+
+class TweetCache(models.Model):
+    plugin_instance = models.ForeignKey(TwitterFeed)
+    text = models.TextField()
+    date = models.DateTimeField()
