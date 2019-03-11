@@ -10,8 +10,11 @@ from djangocms_text_ckeditor.fields import HTMLField
 from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
+from js_color_picker.fields import RGBColorField
+from djangocms_icon.fields import Icon
 from twython import Twython, TwythonError
 from dateutil.parser import parse
+
 from .constants import (
     TWITTER_APP_KEY,
     TWITTER_APP_SECRET,
@@ -190,3 +193,53 @@ class TweetCache(models.Model):
     plugin_instance = models.ForeignKey(TwitterFeed)
     text = models.TextField()
     date = models.DateTimeField()
+
+
+@python_2_unicode_compatible
+class CountersContainer(CMSPlugin):
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout')
+    )
+    def __str__(self):
+        return str(self.pk)
+
+
+@python_2_unicode_compatible
+class Counter(CMSPlugin):
+    body = models.CharField(
+        _('caption body'),
+        max_length=255
+    )
+    counter = models.CharField(
+        _('counter'),
+        max_length=255
+    )
+    image = FilerImageField(
+        verbose_name=_('Image'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+    icon = Icon(
+        verbose_name=_('Icon'),
+        null=True,
+        blank=True
+    )
+    prefix = models.CharField(
+        _('prefix'),
+        max_length=255,
+        null=True,
+        blank=True
+    )
+    suffix = models.CharField(
+        _('suffix'),
+        max_length=255,
+        null=True,
+        blank=True
+    )
+    def __str__(self):
+        return str(self.pk)

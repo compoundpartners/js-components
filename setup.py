@@ -11,7 +11,7 @@ setup(
     author_email='hello@compoundpartners.co.uk',
     packages=find_packages(),
     platforms=['OS Independent'],
-    install_requires=[],
+    install_requires=['twython',],
     include_package_data=True,
     zip_safe=False,
 )

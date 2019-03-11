@@ -1,0 +1,5 @@
+{% load staticfiles cms_tags sekizai_tags %}
+{% for plugin in instance.child_plugin_instances %}
+    {% render_plugin plugin %}
+{% endfor %}
+{% addtoblock "js" %}<script type="text/javascript" src="{% static 'countUp.js' %}"></script>{% endaddtoblock %}

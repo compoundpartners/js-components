@@ -1,12 +1,12 @@
-{% load cms_tags i18n thumbnail djangocms_icon_tags %}
+{% load cms_tags i18n thumbnail %}
 <div class="card mb-3">
   <div class="row no-gutters">
     <div class="col-md-4">
       {% if instance.image %}
         {% thumbnail instance.image 800x600 as thumbnail %}
-        <img class="d-block w-100" src="{{ thumbnail.url }}" alt="{{ instance.carousel_image.default_alt_text|default:'' }}" >
-      {% elif instance.icon != 'fa-' %}
-        <i class="{{ instance.icon|iconset_from_class }} {{ instance.icon }}" aria-hidden="true"></i>
+        <img class="w-100" src="{{ thumbnail.url }}" alt="{{ instance.title }}" >
+      {% elif instance.icon %}
+        {% with icon_class=instance.icon instance=instance.icon %}{% include "djangocms_icon/includes/icon.html" %}{% endwith %}
       {% endif %}
       {% if instance.file_src %}
         <a{% if instance.open_in_new_window %} target="_blank"{% endif %} href="{{ instance.file_src.url }}" class="btn  btn-primary">{{ instance.file_src.label|default:instance.link_text }}</a>

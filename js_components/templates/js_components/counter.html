@@ -1,0 +1,25 @@
+{% load cms_tags thumbnail sekizai_tags %}
+<div class="col">
+{% if instance.image %}
+  {% thumbnail instance.image 800x600 as thumbnail %}
+  <img class="w-100" src="{{ thumbnail.url }}" alt="{{ instance.body }}" >
+{% elif instance.icon %}
+  <div class="text-center display-4">
+    {% with icon_class=instance.icon instance=instance.icon %}{% include "djangocms_icon/includes/icon.html" %}{% endwith %}
+  </div>
+{% endif %}
+  <p class="display-2 text-center" id="counter{{ instance.pk }}">{{ instance.prefix|default:'' }}0{{ instance.suffix|default:'' }}</p>
+  <p class="text-center">{{ instance.body }}</p>
+</div>
+{% addtoblock "js" %}<script>
+$(document).ready(function(){
+    var options{{ instance.pk }} = {
+      {% if instance.prefix %}prefix: '{{ instance.prefix }}'{% if instance.suffix %},{% endif %}{% endif %}
+      {% if instance.suffix %}suffix: '{{ instance.suffix }}'{% endif %}
+    };
+    var counter{{ instance.pk }} = new CountUp('counter{{ instance.pk }}', 0, {{ instance.counter }}, 0, 1, options{{ instance.pk }});
+    if (!counter{{ instance.pk }}.error) {
+        counter{{ instance.pk }}.start();
+    }
+});
+</script>{% endaddtoblock %}

@@ -6,10 +6,12 @@ from . import models
 from .constants import (
     PROMO_LAYOUTS,
     TWITTER_LAYOUTS,
+    COUNTERS_LAYOUTS,
 )
 
 PROMO_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + PROMO_LAYOUTS)), ('default',) + PROMO_LAYOUTS)
 TWITTER_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + TWITTER_LAYOUTS)), ('default',) + TWITTER_LAYOUTS)
+COUNTERS_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + COUNTERS_LAYOUTS)), ('default',) + COUNTERS_LAYOUTS)
 
 
 class PromoUnitForm(forms.ModelForm):
@@ -39,3 +41,17 @@ class TwitterFeedForm(forms.ModelForm):
     class Meta:
         model = models.TwitterFeed
         fields = ['title', 'username', 'count', 'image', 'layout']
+
+
+class CountersContainerForm(forms.ModelForm):
+
+    layout = forms.ChoiceField(COUNTERS_LAYOUT_CHOICES, required=False)
+
+    #def __init__(self, *args, **kwargs):
+        #super(CountersContainerForm, self).__init__(*args, **kwargs)
+        #if len(COUNTERS_LAYOUTS) == 0:
+            #self.fields['layout'].widget = forms.HiddenInput()
+
+    class Meta:
+        model = models.CountersContainer
+        fields = ['layout']

@@ -42,3 +42,13 @@ TWITTER_OAUTH_SECRET = getattr(
     'TWITTER_OAUTH_SECRET',
     False,
 )
+HIDE_COUNTERS = getattr(
+    settings,
+    'COMPONENTS_HIDE_COUNTERS',
+    False,
+)
+COUNTERS_LAYOUTS = getattr(
+    settings,
+    'COMPONENTS_COUNTERS_LAYOUTS',
+    (),
+)
