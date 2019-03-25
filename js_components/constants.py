@@ -52,3 +52,8 @@ COUNTERS_LAYOUTS = getattr(
     'COMPONENTS_COUNTERS_LAYOUTS',
     (),
 )
+HIDE_RAWHTML = getattr(
+    settings,
+    'COMPONENTS_HIDE_RAWHTML',
+    False,
+)

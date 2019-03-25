@@ -17,9 +17,11 @@ js_components/migrations/0001_initial.py
 js_components/migrations/0002_auto_20190225_0516.py
 js_components/migrations/0003_auto_20190306_1548.py
 js_components/migrations/0004_counter_counterscontainer.py
+js_components/migrations/0005_rawhtml.py
 js_components/migrations/__init__.py
 js_components/static/countUp.js
 js_components/templates/js_components/counter.html
 js_components/templates/js_components/counters.html
+js_components/templates/js_components/html.html
 js_components/templates/js_components/promo.html
 js_components/templates/js_components/twitter.html

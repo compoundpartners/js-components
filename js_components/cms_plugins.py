@@ -12,6 +12,7 @@ from .constants import (
     HIDE_PROMO,
     HIDE_TWITTER,
     HIDE_COUNTERS,
+    HIDE_RAWHTML,
 )
 
 class LayoutMixin():
@@ -93,3 +94,21 @@ if not HIDE_COUNTERS:
     plugin_pool.register_plugin(CounterPlugin)
     if 'Bootstrap4GridRowPlugin' in plugin_pool.plugins:
         plugin_pool.plugins['Bootstrap4GridRowPlugin'].child_classes.append('CountersContainerPlugin')
+
+
+class RawHTMLPlugin(CMSPluginBase):
+    module = 'JumpSuite Componens'
+    name = _('Raw HTML')
+    model = models.RawHTML
+    render_template = 'js_components/html.html'
+
+    def render(self, context, instance, placeholder):
+        context.update({
+            'instance': instance,
+            'placeholder': placeholder,
+        })
+        return context
+
+
+if not HIDE_RAWHTML:
+    plugin_pool.register_plugin(RawHTMLPlugin)

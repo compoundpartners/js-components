@@ -243,3 +243,13 @@ class Counter(CMSPlugin):
     )
     def __str__(self):
         return str(self.pk)
+
+
+@python_2_unicode_compatible
+class RawHTML(CMSPlugin):
+    body = models.TextField(
+        _('HTML body')
+    )
+
+    def __str__(self):
+        return str(self.pk)

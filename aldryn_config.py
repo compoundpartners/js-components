@@ -22,6 +22,9 @@ class Form(forms.BaseForm):
     hide_counters = forms.CheckboxField(
         'Hide Counters plugin', required=False, initial=False
     )
+    hide_rawhtml = forms.CheckboxField(
+        'Hide Raw HTML plugin', required=False, initial=False
+    )
 
     def to_settings(self, data, settings):
         settings['COMPONENTS_HIDE_PROMO'] = int(data['hide_promo'])
@@ -35,4 +38,5 @@ class Form(forms.BaseForm):
         if data['twitter_oauth_secret']:
             settings['TWITTER_OAUTH_SECRET'] = data['twitter_oauth_secret']
         settings['COMPONENTS_HIDE_COUNTERS'] = int(data['hide_counters'])
+        settings['COMPONENTS_HIDE_RAWHTML'] = int(data['hide_rawhtml'])
         return settings
