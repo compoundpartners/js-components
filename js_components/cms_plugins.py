@@ -47,6 +47,22 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
     form = forms.PromoUnitForm
     render_template = 'js_components/promo.html'
 
+    fieldsets = [
+        (None, {
+            'fields': (
+                'title',
+                'image',
+                'icon',
+                'content',
+                'link_text',
+                'link_url',
+                'file_src',
+                'layout',
+            )
+        }),
+    ]
+
+
 if not HIDE_PROMO:
     plugin_pool.register_plugin(PromoUnitPlugin)
 
