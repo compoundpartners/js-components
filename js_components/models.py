@@ -46,7 +46,9 @@ class PromoUnit(CMSPlugin):
     )
     title = models.CharField(
         max_length=255,
-        verbose_name=_('Title')
+        verbose_name=_('Title'),
+        blank=True,
+        null=True,
     )
     content = HTMLField(
         verbose_name=_('Content'),
@@ -75,7 +77,7 @@ class PromoUnit(CMSPlugin):
     )
 
     def __str__(self):
-        return self.title
+        return self.title or str(self.pk)
 
 
 @python_2_unicode_compatible
