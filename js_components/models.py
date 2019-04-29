@@ -11,7 +11,6 @@ from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
 from js_color_picker.fields import RGBColorField
-from djangocms_icon.fields import Icon
 from twython import Twython, TwythonError
 from dateutil.parser import parse
 
@@ -28,7 +27,7 @@ class PromoUnit(CMSPlugin):
     icon = Icon(
         verbose_name=_('Icon'),
         blank=True,
-        default='fa-'
+        default=''
     )
     image = FilerImageField(
         verbose_name=_('Image'),
