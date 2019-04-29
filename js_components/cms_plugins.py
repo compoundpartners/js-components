@@ -57,6 +57,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
                 'link_text',
                 'link_url',
                 'file_src',
+                'open_in_new_window',
                 'layout',
             )
         }),
