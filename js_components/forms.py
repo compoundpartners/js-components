@@ -55,3 +55,16 @@ class CountersContainerForm(forms.ModelForm):
     class Meta:
         model = models.CountersContainer
         fields = ['layout']
+
+class CounterForm(forms.ModelForm):
+
+    layout = forms.ChoiceField(COUNTERS_LAYOUT_CHOICES, required=False)
+
+    #def __init__(self, *args, **kwargs):
+        #super(CountersContainerForm, self).__init__(*args, **kwargs)
+        #if len(COUNTERS_LAYOUTS) == 0:
+            #self.fields['layout'].widget = forms.HiddenInput()
+
+    class Meta:
+        model = models.Counter
+        fields = '__all__'

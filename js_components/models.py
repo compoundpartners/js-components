@@ -196,6 +196,7 @@ class TweetCache(models.Model):
     date = models.DateTimeField()
 
 
+#need to remove
 @python_2_unicode_compatible
 class CountersContainer(CMSPlugin):
     layout = models.CharField(
@@ -246,6 +247,12 @@ class Counter(CMSPlugin):
         verbose_name=_('Content'),
         default='',
         blank=True
+    )
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout')
     )
     def __str__(self):
         return str(self.pk)

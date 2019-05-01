@@ -1,4 +1,4 @@
-{% load cms_tags thumbnail sekizai_tags %}
+{% load cms_tags static thumbnail sekizai_tags %}
 <div class="col">
 {% if instance.image %}
   {% thumbnail instance.image 800x600 as thumbnail %}
@@ -11,6 +11,7 @@
   <p class="display-2 text-center" id="counter{{ instance.pk }}">{{ instance.prefix|default:'' }}0{{ instance.suffix|default:'' }}</p>
   <p class="text-center">{{ instance.body }}</p>
 </div>
+{% addtoblock "js" %}<script type="text/javascript" src="{% static 'countUp.js' %}"></script>{% endaddtoblock %}
 {% addtoblock "js" %}<script>
 $(document).ready(function(){
     var options{{ instance.pk }} = {

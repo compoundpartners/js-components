@@ -83,7 +83,7 @@ if not HIDE_TWITTER:
 class CountersContainerPlugin(LayoutMixin, CMSPluginBase):
     module = 'JumpSuite Componens'
     TEMPLATE_NAME = 'js_components/counters_%s.html'
-    name = _('Counters Container')
+    name = _('Counters Container (DO NOT USE, NEED REMOVE)')
     model = models.CountersContainer
     form = forms.CountersContainerForm
     render_template = 'js_components/counters.html'
@@ -97,20 +97,15 @@ class CounterPlugin(LayoutMixin, CMSPluginBase):
     TEMPLATE_NAME = 'js_components/counter_%s.html'
     name = _('Counter')
     model = models.Counter
+    form = forms.CounterForm
     render_template = 'js_components/counter.html'
-    parent_classes = ['CountersContainerPlugin']
 
-    def get_layout(self, context, instance, placeholder):
-        if instance.parent:
-            return instance.parent.get_plugin_instance()[0].layout
-        else:
-            return None
 
 if not HIDE_COUNTERS:
     plugin_pool.register_plugin(CountersContainerPlugin)
     plugin_pool.register_plugin(CounterPlugin)
-    if 'Bootstrap4GridRowPlugin' in plugin_pool.plugins:
-        plugin_pool.plugins['Bootstrap4GridRowPlugin'].child_classes.append('CountersContainerPlugin')
+    #if 'Bootstrap4GridRowPlugin' in plugin_pool.plugins:
+        #plugin_pool.plugins['Bootstrap4GridRowPlugin'].child_classes.append('CountersContainerPlugin')
 
 
 class RawHTMLPlugin(CMSPluginBase):
