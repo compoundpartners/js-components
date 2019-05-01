@@ -211,7 +211,7 @@ class CountersContainer(CMSPlugin):
 @python_2_unicode_compatible
 class Counter(CMSPlugin):
     body = models.CharField(
-        _('caption body'),
+        _('Title'),
         max_length=255
     )
     counter = models.CharField(
@@ -240,6 +240,11 @@ class Counter(CMSPlugin):
         _('suffix'),
         max_length=255,
         null=True,
+        blank=True
+    )
+    content = HTMLField(
+        verbose_name=_('Content'),
+        default='',
         blank=True
     )
     def __str__(self):
