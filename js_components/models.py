@@ -213,7 +213,9 @@ class CountersContainer(CMSPlugin):
 class Counter(CMSPlugin):
     body = models.CharField(
         _('Title'),
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True
     )
     counter = models.CharField(
         _('counter'),
