@@ -25,7 +25,7 @@ class PromoUnitForm(forms.ModelForm):
 
     class Meta:
         model = models.PromoUnit
-        fields = ['icon', 'image', 'file_src', 'title', 'content',
+        fields = ['icon', 'image', 'file_src', 'title', 'subtitle', 'content',
             'link_url', 'link_text', 'open_in_new_window', 'layout']
 
 

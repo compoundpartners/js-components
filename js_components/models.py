@@ -46,7 +46,11 @@ class PromoUnit(CMSPlugin):
     title = models.CharField(
         max_length=255,
         verbose_name=_('Title'),
-        blank=True,
+        null=True,
+    )
+    subtitle = models.CharField(
+        max_length=255,
+        verbose_name=_('Subtitle'),
         null=True,
     )
     content = HTMLField(

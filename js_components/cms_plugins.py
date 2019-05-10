@@ -51,6 +51,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
         (None, {
             'fields': (
                 'title',
+                'subtitle',
                 'image',
                 'icon',
                 'content',

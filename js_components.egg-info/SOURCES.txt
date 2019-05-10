@@ -19,8 +19,14 @@ js_components/migrations/0003_auto_20190306_1548.py
 js_components/migrations/0004_counter_counterscontainer.py
 js_components/migrations/0005_rawhtml.py
 js_components/migrations/0006_auto_20190326_1231.py
+js_components/migrations/0007_auto_20190429_1705.py
+js_components/migrations/0008_auto_20190501_0919.py
+js_components/migrations/0009_counter_layout.py
+js_components/migrations/0010_auto_20190502_0344.py
 js_components/migrations/__init__.py
 js_components/static/countUp.js
+js_components/static/js/countUp.js
+js_components/static/js/countUp.min.js
 js_components/templates/js_components/counter.html
 js_components/templates/js_components/counters.html
 js_components/templates/js_components/html.html
