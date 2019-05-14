@@ -52,6 +52,7 @@ class PromoUnit(CMSPlugin):
         max_length=255,
         verbose_name=_('Subtitle'),
         null=True,
+        blank=True,
     )
     content = HTMLField(
         verbose_name=_('Content'),
