@@ -9,9 +9,17 @@ from .constants import (
     COUNTERS_LAYOUTS,
 )
 
-PROMO_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + PROMO_LAYOUTS)), ('default',) + PROMO_LAYOUTS)
-TWITTER_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + TWITTER_LAYOUTS)), ('default',) + TWITTER_LAYOUTS)
-COUNTERS_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + COUNTERS_LAYOUTS)), ('default',) + COUNTERS_LAYOUTS)
+PROMO_LAYOUT_CHOICES = PROMO_LAYOUTS
+if len(PROMO_LAYOUT_CHOICES) == 0 or len(PROMO_LAYOUT_CHOICES[0]) != 2:
+    PROMO_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + PROMO_LAYOUTS)), ('default',) + PROMO_LAYOUTS)
+
+TWITTER_LAYOUT_CHOICES = TWITTER_LAYOUTS
+if len(TWITTER_LAYOUT_CHOICES) == 0 or len(TWITTER_LAYOUT_CHOICES[0]) != 2:
+    TWITTER_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + TWITTER_LAYOUTS)), ('default',) + TWITTER_LAYOUTS)
+
+COUNTERS_LAYOUT_CHOICES = COUNTERS_LAYOUTS
+if len(COUNTERS_LAYOUT_CHOICES) == 0 or len(COUNTERS_LAYOUT_CHOICES[0]) != 2:
+    COUNTERS_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + COUNTERS_LAYOUTS)), ('default',) + COUNTERS_LAYOUTS)
 
 
 class PromoUnitForm(forms.ModelForm):
