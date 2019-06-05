@@ -13,6 +13,7 @@ from filer.fields.file import FilerFileField
 from js_color_picker.fields import RGBColorField
 from twython import Twython, TwythonError
 from dateutil.parser import parse
+from filer.models.filemodels import File
 
 from .constants import (
     TWITTER_APP_KEY,
@@ -20,6 +21,18 @@ from .constants import (
     TWITTER_OAUTH_TOKEN,
     TWITTER_OAUTH_SECRET
 )
+
+
+class Video(File):
+    @classmethod
+    def matches_file_type(cls, iname, ifile, request):
+        filename_extensions = ['.dv', '.mov', '.mp4', '.avi', '.wmv',]
+        ext = os.path.splitext(iname)[1].lower()
+        return ext in filename_extensions
+
+
+class FilerVideoField(FilerFileField):
+    default_model_class = Video
 
 
 @python_2_unicode_compatible
