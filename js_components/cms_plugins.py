@@ -50,6 +50,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
     fieldsets = [
         (None, {
             'fields': (
+                'layout',
                 'title',
                 'subtitle',
                 'image',
@@ -57,9 +58,8 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
                 'content',
                 'link_text',
                 'link_url',
-                'file_src',
+                ('file_src', 'show_filesize'),
                 'open_in_new_window',
-                'layout',
             )
         }),
     ]

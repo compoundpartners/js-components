@@ -86,6 +86,10 @@ class PromoUnit(CMSPlugin):
         default=False,
         verbose_name=_('Open in new window')
     )
+    show_filesize = models.BooleanField(
+        default=False,
+        verbose_name=_('Show Filesize')
+    )
     layout = models.CharField(
         blank=True,
         default='',
