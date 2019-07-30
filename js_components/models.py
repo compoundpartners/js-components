@@ -166,31 +166,41 @@ class TwitterFeed(CMSPlugin):
                 count=self.count * 10,
                 include_entities=True,
                 include_rts=False,
-                exclude_replies=True
+                exclude_replies=True,
+                tweet_mode='extended'
             )
+            print(timeline[0])
         except TwythonError:
             return {'tweets': [], 'followers': 0}
 
         tweets = []
         for t in timeline:
             d = parse(t["created_at"], ignoretz=True)
-
+            words = t['full_text'].split(' ')
+            t['full_text'] = ' '.join(words[0:-1])
+            link = words[-1]
+            media = []
+            if 'media' in t['entities']:
+                for url in t['entities']['media']:
+                    if url['url'] != link:
+                        media.append(url)
+                t['entities']['media'] = media
             text = Twython.html_for_tweet(t, **TWYTHON_KWARGS)
 
             # Process images into links
             # Twython's html_for_tweet function doesn't handle these.
-            try:
-                for url in t['entities']['media']:
-                    html_link = '<a href="' + \
-                        '%s" rel="nofollow" target="_blank">%s</a>' % (
-                            url['expanded_url'], url['display_url'])
-                    text = text.replace(url['url'], html_link)
-            except KeyError:
-                pass
+            #try:
+            #    for url in t['entities']['media']:
+            #        html_link = '<a href="' + \
+            #            '%s" rel="nofollow" target="_blank">%s</a>' % (
+            #                url['expanded_url'], url['display_url'])
+            #        text = text.replace(url['url'], html_link)
+            #except KeyError:
+            #    pass
 
             # strip out manual RTs
             if text[0:2] != 'RT':
-                tweets.append({'date': d, 'text': text})
+                tweets.append({'date': d, 'text': text, 'tweet_link': link})
 
         if tweets:
             return {
@@ -208,7 +218,7 @@ class TwitterFeed(CMSPlugin):
 
         for t in tweets:
             tc = TweetCache(
-                plugin_instance=self, text=t['text'], date=t['date'])
+                plugin_instance=self, text=t['text'], date=t['date'], tweet_link=t['tweet_link'])
             tc.save()
 
     def save(self):
@@ -223,6 +233,7 @@ class TweetCache(models.Model):
     plugin_instance = models.ForeignKey(TwitterFeed)
     text = models.TextField()
     date = models.DateTimeField()
+    tweet_link = models.CharField(max_length=60, blank=True)
 
 
 #need to remove
