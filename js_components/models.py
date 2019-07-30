@@ -6,6 +6,7 @@ from cms.models.pluginmodel import CMSPlugin
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
+from django.core.cache import cache
 from djangocms_text_ckeditor.fields import HTMLField
 from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
@@ -19,7 +20,9 @@ from .constants import (
     TWITTER_APP_KEY,
     TWITTER_APP_SECRET,
     TWITTER_OAUTH_TOKEN,
-    TWITTER_OAUTH_SECRET
+    TWITTER_OAUTH_SECRET,
+    TWITTER_CACHE_TIMEOUT,
+    TWYTHON_KWARGS,
 )
 
 
@@ -139,6 +142,10 @@ class TwitterFeed(CMSPlugin):
         return self.username
 
     def tweets(self):
+        cache_key = 'use-twitter-cache'
+        if not cache.get(cache_key, False):
+            cache.set(cache_key, True, TWITTER_CACHE_TIMEOUT)
+            self.save()
         return self.tweetcache_set.all().order_by('-date')[:self.count]
 
     def get_latest_twitter_data(self):
@@ -168,7 +175,7 @@ class TwitterFeed(CMSPlugin):
         for t in timeline:
             d = parse(t["created_at"], ignoretz=True)
 
-            text = Twython.html_for_tweet(t)
+            text = Twython.html_for_tweet(t, **TWYTHON_KWARGS)
 
             # Process images into links
             # Twython's html_for_tweet function doesn't handle these.

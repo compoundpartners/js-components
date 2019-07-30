@@ -57,3 +57,13 @@ HIDE_RAWHTML = getattr(
     'COMPONENTS_HIDE_RAWHTML',
     False,
 )
+TWYTHON_KWARGS = getattr(
+    settings,
+    'COMPONENTS_TWYTHON_KWARGS',
+    {'use_display_url': True},
+)
+TWITTER_CACHE_TIMEOUT = getattr(
+    settings,
+    'COMPONENTS_TWITTER_CACHE_TIMEOUT',
+    60*60*24,
+)
