@@ -63,6 +63,7 @@ class PromoUnit(CMSPlugin):
         max_length=255,
         verbose_name=_('Title'),
         null=True,
+        blank=True,
     )
     subtitle = models.CharField(
         max_length=255,
