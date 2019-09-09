@@ -3,6 +3,7 @@ MANIFEST.in
 README.rst
 setup.py
 js_components/__init__.py
+js_components/admin.py
 js_components/cms_plugins.py
 js_components/constants.py
 js_components/forms.py
@@ -23,8 +24,16 @@ js_components/migrations/0007_auto_20190429_1705.py
 js_components/migrations/0008_auto_20190501_0919.py
 js_components/migrations/0009_counter_layout.py
 js_components/migrations/0010_auto_20190502_0344.py
+js_components/migrations/0011_auto_20190510_0430.py
+js_components/migrations/0012_auto_20190514_1402.py
+js_components/migrations/0013_video.py
+js_components/migrations/0014_promounit_show_filesize.py
+js_components/migrations/0015_auto_20190730_1011.py
+js_components/migrations/0016_tweetcache_tweet_link.py
+js_components/migrations/0017_auto_20190812_1414.py
 js_components/migrations/__init__.py
 js_components/static/countUp.js
+js_components/static/jquery.appear.js
 js_components/static/js/countUp.js
 js_components/static/js/countUp.min.js
 js_components/templates/js_components/counter.html

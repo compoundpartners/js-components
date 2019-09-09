@@ -11,7 +11,6 @@ from djangocms_text_ckeditor.fields import HTMLField
 from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
-from js_color_picker.fields import RGBColorField
 from twython import Twython, TwythonError
 from dateutil.parser import parse
 from filer.models.filemodels import File
