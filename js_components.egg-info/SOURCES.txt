@@ -31,6 +31,7 @@ js_components/migrations/0014_promounit_show_filesize.py
 js_components/migrations/0015_auto_20190730_1011.py
 js_components/migrations/0016_tweetcache_tweet_link.py
 js_components/migrations/0017_auto_20190812_1414.py
+js_components/migrations/0018_rawhtmlwithid.py
 js_components/migrations/__init__.py
 js_components/static/countUp.js
 js_components/static/jquery.appear.js

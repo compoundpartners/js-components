@@ -308,3 +308,20 @@ class RawHTML(CMSPlugin):
 
     def __str__(self):
         return str(self.pk)
+
+
+@python_2_unicode_compatible
+class RawHTMLWithID(CMSPlugin):
+    body = models.TextField(
+        _('HTML body')
+    )
+    parameters = models.CharField(
+        _('parameters'),
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text=_('comma separated'),
+    )
+
+    def __str__(self):
+        return self.parameters

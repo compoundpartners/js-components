@@ -119,9 +119,33 @@ class RawHTMLPlugin(CMSPluginBase):
         context.update({
             'instance': instance,
             'placeholder': placeholder,
+            'html': instance.body,
+        })
+        return context
+
+
+class RawHTMLWithIDPlugin(CMSPluginBase):
+    module = 'JumpSuite Componens'
+    name = _('Raw HTML with ID')
+    model = models.RawHTMLWithID
+    render_template = 'js_components/html.html'
+
+    def render(self, context, instance, placeholder):
+        request = context['request']
+        html = instance.body
+        for param in instance.parameters.split(','):
+
+            param = param.strip()
+            key = '[%s]' % param.upper()
+            html = html.replace(key, request.GET.get(param) or request.POST.get(param, ''))
+        context.update({
+            'instance': instance,
+            'placeholder': placeholder,
+            'html': html,
         })
         return context
 
 
 if not HIDE_RAWHTML:
     plugin_pool.register_plugin(RawHTMLPlugin)
+    plugin_pool.register_plugin(RawHTMLWithIDPlugin)
