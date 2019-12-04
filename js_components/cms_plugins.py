@@ -62,6 +62,12 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
                 'open_in_new_window',
             )
         }),
+        (_('Advanced settings'), {
+            'classes': ('collapse',),
+            'fields': (
+                'attributes',
+            )
+        }),
     ]
 
 

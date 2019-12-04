@@ -14,6 +14,8 @@ from filer.fields.file import FilerFileField
 from twython import Twython, TwythonError
 from dateutil.parser import parse
 from filer.models.filemodels import File
+from djangocms_attributes_field import fields
+
 
 from .constants import (
     TWITTER_APP_KEY,
@@ -23,6 +25,14 @@ from .constants import (
     TWITTER_CACHE_TIMEOUT,
     TWYTHON_KWARGS,
 )
+
+class AttributesField(fields.AttributesField):
+    def __init__(self, *args, **kwargs):
+        if 'verbose_name' not in kwargs:
+            kwargs['verbose_name'] = _('Attributes')
+        if 'blank' not in kwargs:
+            kwargs['blank'] = True
+        super(AttributesField, self).__init__(*args, **kwargs)
 
 
 class Video(File):
@@ -99,6 +109,7 @@ class PromoUnit(CMSPlugin):
         max_length=60,
         verbose_name=_('layout')
     )
+    attributes = AttributesField()
 
     def __str__(self):
         return self.title or str(self.pk)
@@ -296,6 +307,8 @@ class Counter(CMSPlugin):
         max_length=60,
         verbose_name=_('layout')
     )
+
+
     def __str__(self):
         return str(self.pk)
 

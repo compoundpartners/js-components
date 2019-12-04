@@ -6,6 +6,7 @@ REQUIREMENTS = [
     'django-cms>=3.4.0',
     'django-filer>=1.2.4',
     'django-friendly-tag-loader==1.3.1',
+    'djangocms-attributes-field>=0.1.1',
     'djangocms-text-ckeditor>=3.1.0',
     'djangocms-icon>=1.0.0',
     'twython',
