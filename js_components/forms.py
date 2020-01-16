@@ -24,7 +24,7 @@ if len(COUNTERS_LAYOUT_CHOICES) == 0 or len(COUNTERS_LAYOUT_CHOICES[0]) != 2:
 
 class PromoUnitForm(forms.ModelForm):
 
-    layout = forms.ChoiceField(PROMO_LAYOUT_CHOICES, required=False)
+    layout = forms.ChoiceField(choices=PROMO_LAYOUT_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
         super(PromoUnitForm, self).__init__(*args, **kwargs)
@@ -39,7 +39,7 @@ class PromoUnitForm(forms.ModelForm):
 
 class TwitterFeedForm(forms.ModelForm):
 
-    layout = forms.ChoiceField(TWITTER_LAYOUT_CHOICES, required=False)
+    layout = forms.ChoiceField(choices=TWITTER_LAYOUT_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
         super(TwitterFeedForm, self).__init__(*args, **kwargs)
@@ -53,7 +53,7 @@ class TwitterFeedForm(forms.ModelForm):
 
 class CountersContainerForm(forms.ModelForm):
 
-    layout = forms.ChoiceField(COUNTERS_LAYOUT_CHOICES, required=False)
+    layout = forms.ChoiceField(choices=COUNTERS_LAYOUT_CHOICES, required=False)
 
     #def __init__(self, *args, **kwargs):
         #super(CountersContainerForm, self).__init__(*args, **kwargs)
@@ -66,7 +66,7 @@ class CountersContainerForm(forms.ModelForm):
 
 class CounterForm(forms.ModelForm):
 
-    layout = forms.ChoiceField(COUNTERS_LAYOUT_CHOICES, required=False)
+    layout = forms.ChoiceField(choices=COUNTERS_LAYOUT_CHOICES, required=False)
 
     #def __init__(self, *args, **kwargs):
         #super(CountersContainerForm, self).__init__(*args, **kwargs)

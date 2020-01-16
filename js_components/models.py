@@ -241,7 +241,7 @@ class TwitterFeed(CMSPlugin):
 
 
 class TweetCache(models.Model):
-    plugin_instance = models.ForeignKey(TwitterFeed)
+    plugin_instance = models.ForeignKey(TwitterFeed, models.CASCADE)
     text = models.TextField()
     date = models.DateTimeField()
     tweet_link = models.CharField(max_length=60, blank=True)
