@@ -85,6 +85,11 @@ class PromoUnit(CMSPlugin):
         default='',
         blank=True
     )
+    rollover_content = HTMLField(
+        verbose_name=_('Rollover Content'),
+        default='',
+        blank=True
+    )
     link_url = models.CharField(
         max_length=255,
         blank=True,

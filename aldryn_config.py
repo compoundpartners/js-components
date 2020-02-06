@@ -4,6 +4,9 @@ class Form(forms.BaseForm):
     hide_promo = forms.CheckboxField(
         'Hide Promo Unit', required=False, initial=False
     )
+    hide_promo_rollover = forms.CheckboxField(
+        'Hide rollover field fro Promo Unit', required=False, initial=True
+    )
     hide_twitter = forms.CheckboxField(
         'Hide Twitter plugin', required=False, initial=False
     )
@@ -28,6 +31,7 @@ class Form(forms.BaseForm):
 
     def to_settings(self, data, settings):
         settings['COMPONENTS_HIDE_PROMO'] = int(data['hide_promo'])
+        settings['COMPONENTS_HIDE_PROMO_ROLLOVER'] = int(data['hide_promo_rollover'])
         settings['COMPONENTS_HIDE_TWITTER'] = int(data['hide_twitter'])
         if data['twitter_app_key']:
             settings['TWITTER_APP_KEY'] = data['twitter_app_key']

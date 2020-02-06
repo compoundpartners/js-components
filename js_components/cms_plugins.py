@@ -10,6 +10,7 @@ from cms.plugin_pool import plugin_pool
 from . import models, forms
 from .constants import (
     HIDE_PROMO,
+    HIDE_PROMO_ROLLOVER,
     HIDE_TWITTER,
     HIDE_COUNTERS,
     HIDE_RAWHTML,
@@ -47,20 +48,25 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
     form = forms.PromoUnitForm
     render_template = 'js_components/promo.html'
 
+    main_fields = [
+        'layout',
+        'title',
+        'subtitle',
+        'image',
+        'icon',
+        'content',
+        'rollover_content',
+        'link_text',
+        'link_url',
+        ('file_src', 'show_filesize'),
+        'open_in_new_window',
+    ]
+    if HIDE_PROMO_ROLLOVER:
+        main_fields.remove('rollover_content')
+
     fieldsets = [
         (None, {
-            'fields': (
-                'layout',
-                'title',
-                'subtitle',
-                'image',
-                'icon',
-                'content',
-                'link_text',
-                'link_url',
-                ('file_src', 'show_filesize'),
-                'open_in_new_window',
-            )
+            'fields': main_fields
         }),
         (_('Advanced settings'), {
             'classes': ('collapse',),
