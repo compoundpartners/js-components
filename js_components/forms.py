@@ -7,6 +7,7 @@ from .constants import (
     PROMO_LAYOUTS,
     TWITTER_LAYOUTS,
     COUNTERS_LAYOUTS,
+    CUSTOM_LAYOUTS,
 )
 
 PROMO_LAYOUT_CHOICES = PROMO_LAYOUTS
@@ -20,6 +21,10 @@ if len(TWITTER_LAYOUT_CHOICES) == 0 or len(TWITTER_LAYOUT_CHOICES[0]) != 2:
 COUNTERS_LAYOUT_CHOICES = COUNTERS_LAYOUTS
 if len(COUNTERS_LAYOUT_CHOICES) == 0 or len(COUNTERS_LAYOUT_CHOICES[0]) != 2:
     COUNTERS_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + COUNTERS_LAYOUTS)), ('default',) + COUNTERS_LAYOUTS)
+
+CUSTOM_LAYOUT_CHOICES = CUSTOM_LAYOUTS
+if len(CUSTOM_LAYOUT_CHOICES) == 0 or len(CUSTOM_LAYOUT_CHOICES[0]) != 2:
+    CUSTOM_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + CUSTOM_LAYOUTS)), ('default',) + CUSTOM_LAYOUTS)
 
 
 class PromoUnitForm(forms.ModelForm):
@@ -76,3 +81,11 @@ class CounterForm(forms.ModelForm):
     class Meta:
         model = models.Counter
         fields = '__all__'
+
+class CustomForm(forms.ModelForm):
+
+    layout = forms.ChoiceField(choices=CUSTOM_LAYOUT_CHOICES, required=False)
+
+    class Meta:
+        model = models.Custom
+        fields = ['layout']

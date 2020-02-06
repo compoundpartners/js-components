@@ -155,3 +155,12 @@ class RawHTMLWithIDPlugin(CMSPluginBase):
 if not HIDE_RAWHTML:
     plugin_pool.register_plugin(RawHTMLPlugin)
     plugin_pool.register_plugin(RawHTMLWithIDPlugin)
+
+
+class CustomPlugin(LayoutMixin, CMSPluginBase):
+    module = 'JumpSuite Componens'
+    TEMPLATE_NAME = 'js_components/custom_%s.html'
+    name = _('Custom')
+    model = models.Custom
+    form = forms.CustomForm
+    render_template = 'js_components/custom.html'

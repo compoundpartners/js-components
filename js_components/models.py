@@ -338,3 +338,17 @@ class RawHTMLWithID(CMSPlugin):
 
     def __str__(self):
         return self.parameters
+
+
+@python_2_unicode_compatible
+class Custom(CMSPlugin):
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout')
+    )
+
+
+    def __str__(self):
+        return str(self.pk)
