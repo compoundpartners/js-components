@@ -14,6 +14,7 @@ from .constants import (
     HIDE_TWITTER,
     HIDE_COUNTERS,
     HIDE_RAWHTML,
+    HIDE_GATED_CONTENT,
 )
 
 class LayoutMixin():
@@ -71,6 +72,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
         (_('Advanced settings'), {
             'classes': ('collapse',),
             'fields': (
+                'modal_id',
                 'attributes',
             )
         }),
@@ -163,6 +165,7 @@ if not HIDE_RAWHTML:
     plugin_pool.register_plugin(RawHTMLWithIDPlugin)
 
 
+@plugin_pool.register_plugin
 class CustomPlugin(LayoutMixin, CMSPluginBase):
     module = 'JumpSuite Componens'
     TEMPLATE_NAME = 'js_components/custom_%s.html'
@@ -170,3 +173,16 @@ class CustomPlugin(LayoutMixin, CMSPluginBase):
     model = models.Custom
     form = forms.CustomForm
     render_template = 'js_components/custom.html'
+
+
+class GatedContentPlugin(LayoutMixin, CMSPluginBase):
+    module = 'JumpSuite Componens'
+    TEMPLATE_NAME = 'js_components/gated_content_%s.html'
+    name = _('Gated Content')
+    model = models.GatedContent
+    form = forms.GatedContentForm
+    render_template = 'js_components/gated_content.html'
+    allow_children = True
+
+if not HIDE_GATED_CONTENT:
+    plugin_pool.register_plugin(GatedContentPlugin)

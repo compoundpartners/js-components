@@ -67,6 +67,16 @@ HIDE_RAWHTML = getattr(
     'COMPONENTS_HIDE_RAWHTML',
     False,
 )
+HIDE_GATED_CONTENT = getattr(
+    settings,
+    'COMPONENTS_HIDE_GATED_CONTENT',
+    True,
+)
+GATED_CONTENT_LAYOUTS = getattr(
+    settings,
+    'COMPONENTS_GATED_CONTENT_LAYOUTS',
+    (),
+)
 TWYTHON_KWARGS = getattr(
     settings,
     'COMPONENTS_TWYTHON_KWARGS',

@@ -1,0 +1,19 @@
+{% load cms_tags %}
+
+<div class="gated-layout">
+
+  {% for plugin in instance.child_plugin_instances %}
+      {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+  {% endfor %}
+
+</div>
+
+<script>
+
+window.addEventListener('message', function(event){
+  if( event.data == "show_content" ) {
+    $('.gated-layout').show();
+  }
+}, false);
+
+</script>

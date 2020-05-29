@@ -34,6 +34,10 @@ js_components/migrations/0016_tweetcache_tweet_link.py
 js_components/migrations/0017_auto_20190812_1414.py
 js_components/migrations/0018_rawhtmlwithid.py
 js_components/migrations/0019_promounit_attributes.py
+js_components/migrations/0020_auto_20200206_0917.py
+js_components/migrations/0021_promounit_rollover_content.py
+js_components/migrations/0022_promounit_modal_id.py
+js_components/migrations/0023_gatedcontent.py
 js_components/migrations/__init__.py
 js_components/static/countUp.js
 js_components/static/jquery.appear.js
@@ -41,6 +45,8 @@ js_components/static/js/countUp.js
 js_components/static/js/countUp.min.js
 js_components/templates/js_components/counter.html
 js_components/templates/js_components/counters.html
+js_components/templates/js_components/custom.html
+js_components/templates/js_components/gated_content.html
 js_components/templates/js_components/html.html
 js_components/templates/js_components/promo.html
 js_components/templates/js_components/twitter.html

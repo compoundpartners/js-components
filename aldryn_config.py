@@ -28,6 +28,9 @@ class Form(forms.BaseForm):
     hide_rawhtml = forms.CheckboxField(
         'Hide Raw HTML plugin', required=False, initial=False
     )
+    hide_gated_content = forms.CheckboxField(
+        'Hide Gated Content plugin', required=False, initial=True
+    )
 
     def to_settings(self, data, settings):
         settings['COMPONENTS_HIDE_PROMO'] = int(data['hide_promo'])
@@ -43,4 +46,5 @@ class Form(forms.BaseForm):
             settings['TWITTER_OAUTH_SECRET'] = data['twitter_oauth_secret']
         settings['COMPONENTS_HIDE_COUNTERS'] = int(data['hide_counters'])
         settings['COMPONENTS_HIDE_RAWHTML'] = int(data['hide_rawhtml'])
+        settings['COMPONENTS_HIDE_GATED_CONTENT'] = int(data['hide_gated_content'])
         return settings

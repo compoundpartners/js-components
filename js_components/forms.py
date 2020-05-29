@@ -8,6 +8,7 @@ from .constants import (
     TWITTER_LAYOUTS,
     COUNTERS_LAYOUTS,
     CUSTOM_LAYOUTS,
+    GATED_CONTENT_LAYOUTS,
 )
 
 PROMO_LAYOUT_CHOICES = PROMO_LAYOUTS
@@ -25,6 +26,10 @@ if len(COUNTERS_LAYOUT_CHOICES) == 0 or len(COUNTERS_LAYOUT_CHOICES[0]) != 2:
 CUSTOM_LAYOUT_CHOICES = CUSTOM_LAYOUTS
 if len(CUSTOM_LAYOUT_CHOICES) == 0 or len(CUSTOM_LAYOUT_CHOICES[0]) != 2:
     CUSTOM_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + CUSTOM_LAYOUTS)), ('default',) + CUSTOM_LAYOUTS)
+
+GATED_CONTENT_LAYOUT_CHOICES = GATED_CONTENT_LAYOUTS
+if len(GATED_CONTENT_LAYOUT_CHOICES) == 0 or len(GATED_CONTENT_LAYOUT_CHOICES[0]) != 2:
+    GATED_CONTENT_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + GATED_CONTENT_LAYOUTS)), ('default',) + GATED_CONTENT_LAYOUTS)
 
 
 class PromoUnitForm(forms.ModelForm):
@@ -85,6 +90,14 @@ class CounterForm(forms.ModelForm):
 class CustomForm(forms.ModelForm):
 
     layout = forms.ChoiceField(choices=CUSTOM_LAYOUT_CHOICES, required=False)
+
+    class Meta:
+        model = models.Custom
+        fields = ['layout']
+
+class GatedContentForm(forms.ModelForm):
+
+    layout = forms.ChoiceField(choices=GATED_CONTENT_LAYOUT_CHOICES, required=False)
 
     class Meta:
         model = models.Custom

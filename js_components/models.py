@@ -114,6 +114,13 @@ class PromoUnit(CMSPlugin):
         max_length=60,
         verbose_name=_('layout')
     )
+    modal_id = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('Modal Id'),
+        help_text=_('Do not include a preceding "#" symbol.'),
+    )
     attributes = AttributesField()
 
     def __str__(self):
@@ -354,6 +361,18 @@ class Custom(CMSPlugin):
         verbose_name=_('layout')
     )
 
+    def __str__(self):
+        return str(self.pk)
+
+
+@python_2_unicode_compatible
+class GatedContent(CMSPlugin):
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout')
+    )
 
     def __str__(self):
         return str(self.pk)
