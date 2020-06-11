@@ -1,0 +1,18 @@
+{% load staticfiles cms_tags sekizai_tags %}
+
+<div id="animate-layout-{{ instance.pk }}">
+
+  {% for plugin in instance.child_plugin_instances %}
+      {% with forloop as parentloop %}{% render_plugin plugin %}{% endwith %}
+  {% endfor %}
+
+</div>
+
+{% addtoblock "css" %}<link href="{% static 'animate.css/animate.min.css' %}" rel="stylesheet">{% endaddtoblock %}
+{% addtoblock "js" %}<script type="text/javascript" src="{% static 'animate.js' %}"></script>{% endaddtoblock %}
+
+<script>
+    $(function() {
+      animateCSS($('#animate-layout-{{ instance.pk }}'), '{{ instance.animation }}');
+    });
+</script>

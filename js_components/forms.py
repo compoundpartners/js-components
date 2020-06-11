@@ -9,6 +9,7 @@ from .constants import (
     COUNTERS_LAYOUTS,
     CUSTOM_LAYOUTS,
     GATED_CONTENT_LAYOUTS,
+    ANIMATIONS,
 )
 
 PROMO_LAYOUT_CHOICES = PROMO_LAYOUTS
@@ -30,6 +31,10 @@ if len(CUSTOM_LAYOUT_CHOICES) == 0 or len(CUSTOM_LAYOUT_CHOICES[0]) != 2:
 GATED_CONTENT_LAYOUT_CHOICES = GATED_CONTENT_LAYOUTS
 if len(GATED_CONTENT_LAYOUT_CHOICES) == 0 or len(GATED_CONTENT_LAYOUT_CHOICES[0]) != 2:
     GATED_CONTENT_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + GATED_CONTENT_LAYOUTS)), ('default',) + GATED_CONTENT_LAYOUTS)
+
+
+ANIMATION_CHOICES = zip(ANIMATIONS, ANIMATIONS)
+
 
 
 class PromoUnitForm(forms.ModelForm):
@@ -102,3 +107,12 @@ class GatedContentForm(forms.ModelForm):
     class Meta:
         model = models.Custom
         fields = ['layout']
+
+
+class AnimateForm(forms.ModelForm):
+
+    animation = forms.ChoiceField(choices=ANIMATION_CHOICES)
+
+    class Meta:
+        model = models.Animate
+        exclude = ['layout']

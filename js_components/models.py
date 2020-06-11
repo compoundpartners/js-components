@@ -376,3 +376,36 @@ class GatedContent(CMSPlugin):
 
     def __str__(self):
         return str(self.pk)
+
+
+@python_2_unicode_compatible
+class Animate(CMSPlugin):
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout'),
+    )
+    animation = models.CharField(
+        max_length=60,
+        verbose_name=_('animation'),
+    )
+    duration = models.PositiveSmallIntegerField(
+        blank=True,
+        default=0,
+        verbose_name=_('duration [ms]'),
+        help_text=_('slow 2s/slower 3s/fast 800ms/faster  500ms'),
+    )
+    delay = models.PositiveSmallIntegerField(
+        blank=True,
+        default=0,
+        verbose_name=_('delay [ms]'),
+    )
+    repeat = models.PositiveSmallIntegerField(
+        blank=True,
+        default=0,
+        verbose_name=_('repeat'),
+    )
+
+    def __str__(self):
+        return self.animation

@@ -186,3 +186,14 @@ class GatedContentPlugin(LayoutMixin, CMSPluginBase):
 
 if not HIDE_GATED_CONTENT:
     plugin_pool.register_plugin(GatedContentPlugin)
+
+
+@plugin_pool.register_plugin
+class AnimatePlugin(LayoutMixin, CMSPluginBase):
+    module = 'JumpSuite Componens'
+    TEMPLATE_NAME = 'js_components/animate_%s.html'
+    name = _('Animate')
+    model = models.Animate
+    form = forms.AnimateForm
+    render_template = 'js_components/animate.html'
+    allow_children = True
