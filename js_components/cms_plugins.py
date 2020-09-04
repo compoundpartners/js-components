@@ -8,6 +8,7 @@ from django.template.loader import select_template
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
 from . import models, forms
+from .utils.urlmatch import urlmatch
 from .constants import (
     HIDE_PROMO,
     HIDE_PROMO_ROLLOVER,
@@ -219,5 +220,25 @@ class JSFolderPlugin(LayoutMixin, CMSPluginBase):
             'instance': instance,
             'placeholder': placeholder,
             'files': files,
+        })
+        return context
+
+
+@plugin_pool.register_plugin
+class IncludeExcludeContainer(CMSPluginBase):
+    module = 'JumpSuite Componens'
+    name = _('Include/Exclude Container')
+    model = models.IncludeExcludeContainer
+    render_template = 'js_components/container.html'
+    allow_children = True
+
+    def render(self, context, instance, placeholder):
+        request = context['request']
+        url = '%s://%s%s' % (request.scheme, request.META['HTTP_HOST'], request.path)
+        is_shown = urlmatch(','.join(instance.include.split('\n')), url) and not urlmatch(','.join(instance.exclude.split('\n')), url)
+        context.update({
+            'instance': instance,
+            'placeholder': placeholder,
+            'is_shown': is_shown,
         })
         return context

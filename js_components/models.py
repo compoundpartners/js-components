@@ -451,3 +451,20 @@ class Folder(CMSPlugin):
 
     def __str__(self):
         return self.title
+
+
+@python_2_unicode_compatible
+class IncludeExcludeContainer(CMSPlugin):
+    include = models.TextField(
+        verbose_name=_('Show on only these pages'),
+        blank=True,
+        default='*',
+        help_text='URL without domain should starts withou first slash (/) (e.g. test/me). Use asterisk (*) to show/hode on multiple pages (e.g. blog/* or *://test.com/*)'
+    )
+    exclude = models.TextField(
+        verbose_name=_('Hide onthese pages'),
+        blank=True,
+        default='',
+    )
+    def __str__(self):
+        return str(self.pk)
