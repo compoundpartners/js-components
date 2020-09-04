@@ -36,6 +36,12 @@ if len(GATED_CONTENT_LAYOUT_CHOICES) == 0 or len(GATED_CONTENT_LAYOUT_CHOICES[0]
 ANIMATION_CHOICES = zip(ANIMATIONS, ANIMATIONS)
 
 
+ORDER_BY_CHOICES = (
+  ('', '--------'),
+  ('uploaded_at', 'Date'),
+  ('name', 'Name'),
+  ('original_filename', 'File Name'),
+)
 
 class PromoUnitForm(forms.ModelForm):
 
@@ -115,4 +121,13 @@ class AnimateForm(forms.ModelForm):
 
     class Meta:
         model = models.Animate
+        exclude = ['layout']
+
+
+class FolderForm(forms.ModelForm):
+
+    order_by = forms.ChoiceField(choices=ORDER_BY_CHOICES, required=False)
+
+    class Meta:
+        model = models.Folder
         exclude = ['layout']

@@ -39,6 +39,7 @@ js_components/migrations/0021_promounit_rollover_content.py
 js_components/migrations/0022_promounit_modal_id.py
 js_components/migrations/0023_gatedcontent.py
 js_components/migrations/0024_animate.py
+js_components/migrations/0025_folder.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
@@ -55,6 +56,7 @@ js_components/templates/js_components/animate.html
 js_components/templates/js_components/counter.html
 js_components/templates/js_components/counters.html
 js_components/templates/js_components/custom.html
+js_components/templates/js_components/folder.html
 js_components/templates/js_components/gated_content.html
 js_components/templates/js_components/html.html
 js_components/templates/js_components/promo.html

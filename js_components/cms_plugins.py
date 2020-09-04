@@ -197,3 +197,27 @@ class AnimatePlugin(LayoutMixin, CMSPluginBase):
     form = forms.AnimateForm
     render_template = 'js_components/animate.html'
     allow_children = True
+
+
+@plugin_pool.register_plugin
+class JSFolderPlugin(LayoutMixin, CMSPluginBase):
+    module = 'JumpSuite Componens'
+    TEMPLATE_NAME = 'js_components/folder_%s.html'
+    name = _('Filer listing')
+    model = models.Folder
+    form = forms.FolderForm
+    render_template = 'js_components/folder.html'
+
+    def render(self, context, instance, placeholder):
+        request = context['request']
+        files = []
+        if instance.folder:
+            files = instance.folder.files.all()
+            if instance.order_by:
+                files = files.order_by(instance.order_by)
+        context.update({
+            'instance': instance,
+            'placeholder': placeholder,
+            'files': files,
+        })
+        return context

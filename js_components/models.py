@@ -11,6 +11,7 @@ from djangocms_text_ckeditor.fields import HTMLField
 from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
 from filer.fields.file import FilerFileField
+from filer.fields.folder import FilerFolderField
 from twython import Twython, TwythonError
 from dateutil.parser import parse
 from filer.models.filemodels import File
@@ -409,3 +410,44 @@ class Animate(CMSPlugin):
 
     def __str__(self):
         return self.animation
+
+
+@python_2_unicode_compatible
+class Folder(CMSPlugin):
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout'),
+    )
+    title = models.CharField(
+        max_length=60,
+        verbose_name=_('title'),
+        default='',
+        blank=True
+    )
+    summary = HTMLField(
+        verbose_name=_('summary'),
+        default='',
+        blank=True
+    )
+    folder = FilerFolderField(
+        verbose_name=_('select folder'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
+    order_by = models.CharField(
+        max_length=60,
+        verbose_name=_('order by'),
+        null=True,
+        blank=True,
+    )
+    open_in_new_window = models.BooleanField(
+        default=False,
+        verbose_name=_('Open in new window')
+    )
+
+    def __str__(self):
+        return self.title

@@ -1,0 +1,9 @@
+<div>
+  <h3>{{ instance.title }}</h3>
+  {{ instance.summary|safe }}
+  <ul>
+  {% for file in files %}
+    <li><a href="{{ file.canonical_url }}"{% if instance.open_in_new_window %} target="_blank"{% endif %}>{{ file.label }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
