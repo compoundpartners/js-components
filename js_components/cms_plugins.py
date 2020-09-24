@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-
+import functools
+import six
 from django.utils.translation import ugettext_lazy as _
 from django.template import TemplateDoesNotExist
 from django.template.loader import select_template
-from cms.plugin_base import CMSPluginBase
+from cms.plugin_base import CMSPluginBase, CMSPluginBaseMetaclass
 from cms.plugin_pool import plugin_pool
 from . import models, forms
 from .utils.urlmatch import urlmatch
@@ -16,6 +17,7 @@ from .constants import (
     HIDE_COUNTERS,
     HIDE_RAWHTML,
     HIDE_GATED_CONTENT,
+    CUSTOM_PLUGINS,
 )
 
 class LayoutMixin():
@@ -166,6 +168,7 @@ if not HIDE_RAWHTML:
     plugin_pool.register_plugin(RawHTMLWithIDPlugin)
 
 
+
 @plugin_pool.register_plugin
 class CustomPlugin(LayoutMixin, CMSPluginBase):
     module = 'JumpSuite Componens'
@@ -174,6 +177,20 @@ class CustomPlugin(LayoutMixin, CMSPluginBase):
     model = models.Custom
     form = forms.CustomForm
     render_template = 'js_components/custom.html'
+
+    def get_form(self, request, obj=None, **kwargs):
+        Form = super().get_form(request, obj=None, **kwargs)
+        if self.name in CUSTOM_PLUGINS:
+            Form.plugin_name=self.name
+        return Form
+
+for name, parameters in CUSTOM_PLUGINS.items():
+    p = type(
+        str(name.replace(' ', '') + 'Plugin'),
+        (CustomPlugin,),
+        {'name': name},
+    )
+    plugin_pool.register_plugin(p)
 
 
 class GatedContentPlugin(LayoutMixin, CMSPluginBase):

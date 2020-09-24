@@ -10,28 +10,34 @@ from .constants import (
     CUSTOM_LAYOUTS,
     GATED_CONTENT_LAYOUTS,
     ANIMATIONS,
+    CUSTOM_PLUGINS,
 )
 
-PROMO_LAYOUT_CHOICES = PROMO_LAYOUTS
-if len(PROMO_LAYOUT_CHOICES) == 0 or len(PROMO_LAYOUT_CHOICES[0]) != 2:
-    PROMO_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + PROMO_LAYOUTS)), ('default',) + PROMO_LAYOUTS)
+try:
+    from js_custom_fields.forms import CustomFieldsFormMixin
+except:
+    class CustomFieldsFormMixin(object):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            if 'custom_fields' in self.fields:
+                self.fields['custom_fields'].widget = forms.HiddenInput()
 
-TWITTER_LAYOUT_CHOICES = TWITTER_LAYOUTS
-if len(TWITTER_LAYOUT_CHOICES) == 0 or len(TWITTER_LAYOUT_CHOICES[0]) != 2:
-    TWITTER_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + TWITTER_LAYOUTS)), ('default',) + TWITTER_LAYOUTS)
+def get_choices(choices, add_default=True):
+    if len(choices) == 0 or len(choices[0]) != 2:
+        if add_default:
+            return zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + choices)), ('default',) + choices)
+        return zip(list(map(lambda s: slugify(s).replace('-', '_'), choices)), choices)
+    return choices
 
-COUNTERS_LAYOUT_CHOICES = COUNTERS_LAYOUTS
-if len(COUNTERS_LAYOUT_CHOICES) == 0 or len(COUNTERS_LAYOUT_CHOICES[0]) != 2:
-    COUNTERS_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + COUNTERS_LAYOUTS)), ('default',) + COUNTERS_LAYOUTS)
+PROMO_LAYOUT_CHOICES = get_choices(PROMO_LAYOUTS)
 
-CUSTOM_LAYOUT_CHOICES = CUSTOM_LAYOUTS
-if len(CUSTOM_LAYOUT_CHOICES) == 0 or len(CUSTOM_LAYOUT_CHOICES[0]) != 2:
-    CUSTOM_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + CUSTOM_LAYOUTS)), ('default',) + CUSTOM_LAYOUTS)
+TWITTER_LAYOUT_CHOICES = get_choices(TWITTER_LAYOUTS)
 
-GATED_CONTENT_LAYOUT_CHOICES = GATED_CONTENT_LAYOUTS
-if len(GATED_CONTENT_LAYOUT_CHOICES) == 0 or len(GATED_CONTENT_LAYOUT_CHOICES[0]) != 2:
-    GATED_CONTENT_LAYOUT_CHOICES = zip(list(map(lambda s: slugify(s).replace('-', '_'), ('',) + GATED_CONTENT_LAYOUTS)), ('default',) + GATED_CONTENT_LAYOUTS)
+COUNTERS_LAYOUT_CHOICES = get_choices(COUNTERS_LAYOUTS)
 
+CUSTOM_LAYOUT_CHOICES = get_choices(CUSTOM_LAYOUTS)
+
+GATED_CONTENT_LAYOUT_CHOICES = get_choices(GATED_CONTENT_LAYOUTS)
 
 ANIMATION_CHOICES = zip(ANIMATIONS, ANIMATIONS)
 
@@ -98,13 +104,35 @@ class CounterForm(forms.ModelForm):
         model = models.Counter
         fields = '__all__'
 
-class CustomForm(forms.ModelForm):
 
-    layout = forms.ChoiceField(choices=CUSTOM_LAYOUT_CHOICES, required=False)
+class CustomForm(CustomFieldsFormMixin, forms.ModelForm):
+
+    layout = forms.ChoiceField(required=False)
+
+    custom_fields = 'get_custom_fields'
+    plugin_name = None
 
     class Meta:
         model = models.Custom
-        fields = ['layout']
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['layout'].choices = self.get_layouts()
+
+    def get_custom_fields(self):
+        return {}
+
+    def get_layouts(self):
+        if self.plugin_name:
+            return get_choices(CUSTOM_PLUGINS.get(self.plugin_name, {}).get('layouts', (self.plugin_name,)), add_default=False)
+        return CUSTOM_LAYOUT_CHOICES
+
+    def get_custom_fields(self):
+        if self.plugin_name:
+            return CUSTOM_PLUGINS.get(self.plugin_name, {}).get('fields', {})
+        return {}
+
 
 class GatedContentForm(forms.ModelForm):
 

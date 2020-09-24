@@ -7,6 +7,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
+from django.contrib.postgres.fields import JSONField
 from djangocms_text_ckeditor.fields import HTMLField
 from djangocms_icon.fields import Icon
 from filer.fields.image import FilerImageField
@@ -361,6 +362,7 @@ class Custom(CMSPlugin):
         max_length=60,
         verbose_name=_('layout')
     )
+    custom_fields = JSONField(blank=True, null=True)
 
     def __str__(self):
         return str(self.pk)

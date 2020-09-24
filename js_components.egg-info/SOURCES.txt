@@ -41,6 +41,7 @@ js_components/migrations/0023_gatedcontent.py
 js_components/migrations/0024_animate.py
 js_components/migrations/0025_folder.py
 js_components/migrations/0026_includeexcludecontainer.py
+js_components/migrations/0027_custom_custom_fields.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
@@ -63,3 +64,5 @@ js_components/templates/js_components/gated_content.html
 js_components/templates/js_components/html.html
 js_components/templates/js_components/promo.html
 js_components/templates/js_components/twitter.html
+js_components/utils/__init__.py
+js_components/utils/urlmatch.py

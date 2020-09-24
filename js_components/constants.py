@@ -62,6 +62,11 @@ CUSTOM_LAYOUTS = getattr(
     'COMPONENTS_CUSTOM_LAYOUTS',
     (),
 )
+CUSTOM_PLUGINS = getattr(
+    settings,
+    'COMPONENTS_CUSTOM_PLUGINS',
+    {},
+)
 HIDE_RAWHTML = getattr(
     settings,
     'COMPONENTS_HIDE_RAWHTML',
