@@ -247,12 +247,15 @@ class IncludeExcludeContainer(CMSPluginBase):
     name = _('Include/Exclude Container')
     model = models.IncludeExcludeContainer
     render_template = 'js_components/container.html'
+    change_form_template = 'admin/js_components/change_form_container.html'
     allow_children = True
+    cache = False
 
     def render(self, context, instance, placeholder):
         request = context['request']
         url = '%s://%s%s' % (request.scheme, request.META['HTTP_HOST'], request.path)
         is_shown = urlmatch(','.join(instance.include.split('\n')), url) and not urlmatch(','.join(instance.exclude.split('\n')), url)
+        print(request.current_page, request.current_page.get_root(), is_shown)
         context.update({
             'instance': instance,
             'placeholder': placeholder,

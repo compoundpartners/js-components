@@ -1,0 +1,18 @@
+{% extends 'admin/change_form.html' %}
+{% load static %}
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script>
+  (function($) {
+    $( "label" ).append('<a href="https://www.jsuite.co.uk/en-gb/support/support-articles/include-exclude/" target="_blank" class="d-inline-block text-right">' +
+' <span class="icon icon-info">' +
+'   <svg role="presentation" style="fill:#128187; height: 22px; width: 22px;">' +
+'     <use xlink:href="/static/djangocms_bootstrap4/sprites/icons.svg#info"></use>' +
+'   </svg>' +
+' </span>' +
+'</a>');
+  console.log($( "label" ));
+  })(django.jQuery);
+</script>
+{% endblock %}

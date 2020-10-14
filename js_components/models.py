@@ -458,13 +458,13 @@ class Folder(CMSPlugin):
 @python_2_unicode_compatible
 class IncludeExcludeContainer(CMSPlugin):
     include = models.TextField(
-        verbose_name=_('Show on only these pages'),
+        verbose_name=_('Show on these pages'),
         blank=True,
         default='*',
-        help_text='URL without domain should starts withou first slash (/) (e.g. test/me). Use asterisk (*) to show/hode on multiple pages (e.g. blog/* or *://test.com/*)'
+        help_text='Always start the URL without the domain or the first slash (/) (e.g. test/me). Use an asterisk  to show/hide on multiple pages (e.g. blog/* or *://test.com/*)'
     )
     exclude = models.TextField(
-        verbose_name=_('Hide onthese pages'),
+        verbose_name=_('Hide on these pages'),
         blank=True,
         default='',
     )
