@@ -409,6 +409,10 @@ class Animate(CMSPlugin):
         default=0,
         verbose_name=_('repeat'),
     )
+    on_rollover = models.BooleanField(
+        default=False,
+        verbose_name=_('On Rollover')
+    )
 
     def __str__(self):
         return self.animation
