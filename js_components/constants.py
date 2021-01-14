@@ -93,7 +93,7 @@ TWITTER_CACHE_TIMEOUT = getattr(
     60*60*24,
 )
 
-ANIMATIONS = [
+ALL_ANIMATIONS = [
     # Attention seekers
   'bounce',
   'flash',
@@ -207,3 +207,19 @@ ANIMATIONS = [
   'slideOutLeft',
   'slideOutRight',
   'slideOutUp']
+
+ENABLED_ANIMATIONS = getattr(
+    settings,
+    'COMPONENTS_ENABLED_ANIMATIONS',
+    ('*'),
+)
+DISABLED_ANIMATIONS = getattr(
+    settings,
+    'COMPONENTS_DISABLED_ANIMATIONS',
+    (),
+)
+import re
+enabled = re.findall("(%s)" % "|".join(map(lambda x: x.strip().replace('*', '\S*'), ENABLED_ANIMATIONS)), ' '.join(ALL_ANIMATIONS), re.I)
+disabled = re.findall("(%s)" % "|".join(map(lambda x: x.strip().replace('*', '\S*'), DISABLED_ANIMATIONS)), ' '.join(enabled), re.I)
+ANIMATIONS = list(set(enabled) - set(disabled))
+ANIMATIONS.sort()
