@@ -474,3 +474,15 @@ class IncludeExcludeContainer(CMSPlugin):
     )
     def __str__(self):
         return str(self.pk)
+
+
+@python_2_unicode_compatible
+class Float(CMSPlugin):
+    alignment = models.CharField(
+        verbose_name=_('Alignment'),
+        default='',
+        blank=True,
+        max_length=255,
+    )
+    def __str__(self):
+        return str(self.pk)

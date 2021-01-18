@@ -43,6 +43,7 @@ js_components/migrations/0025_folder.py
 js_components/migrations/0026_includeexcludecontainer.py
 js_components/migrations/0027_custom_custom_fields.py
 js_components/migrations/0028_auto_20201014_1259.py
+js_components/migrations/0029_float.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
@@ -56,11 +57,13 @@ js_components/static/animate.css/package.json
 js_components/static/js/countUp.js
 js_components/static/js/countUp.min.js
 js_components/templates/admin/js_components/change_form_container.html
+js_components/templates/admin/js_components/float.html
 js_components/templates/js_components/animate.html
 js_components/templates/js_components/container.html
 js_components/templates/js_components/counter.html
 js_components/templates/js_components/counters.html
 js_components/templates/js_components/custom.html
+js_components/templates/js_components/float.html
 js_components/templates/js_components/folder.html
 js_components/templates/js_components/gated_content.html
 js_components/templates/js_components/html.html

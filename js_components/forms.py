@@ -49,6 +49,14 @@ ORDER_BY_CHOICES = (
   ('original_filename', 'File Name'),
 )
 
+FLOAT_CHOICES = (
+  ('', '--------'),
+  ('left', 'Left'),
+  ('center', 'Center'),
+  ('right', 'Right'),
+)
+
+
 class PromoUnitForm(forms.ModelForm):
 
     layout = forms.ChoiceField(choices=PROMO_LAYOUT_CHOICES, required=False)
@@ -159,3 +167,12 @@ class FolderForm(forms.ModelForm):
     class Meta:
         model = models.Folder
         exclude = ['layout']
+
+
+class FloatForm(forms.ModelForm):
+
+    alignment = forms.ChoiceField(choices=FLOAT_CHOICES, required=False)
+
+    class Meta:
+        model = models.Float
+        fields = '__all__'

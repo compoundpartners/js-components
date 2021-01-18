@@ -1,0 +1,115 @@
+{% extends 'admin/change_form.html' %}
+
+{% load static %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'djangocms_bootstrap4/css/base.css' %}">
+{% endblock %}
+
+
+{% block admin_change_form_document_ready %}
+{{ block.super }}
+<script>
+  (function($) {
+
+    iconTemplate = (icon, staticPath = '{% static '' %}', title = '') => `
+        <span class="icon icon-${icon}" title="${title}">
+            <svg role="presentation">
+                <use xlink:href="${staticPath}djangocms_bootstrap4/sprites/icons.svg#${icon}"></use>
+            </svg>
+        </span>`
+
+    static_path = '{% static '' %}';
+    icons = ["align-reset","flex-content-start","flex-content-center","flex-content-end"];
+    templates = {
+            wrapper: (cls = '', buttons = '') => `
+                <div class="bootstrap4-button-group${cls}">
+                    <div class="btn-group" role="group" aria-label="">
+                        ${buttons}
+                    </div>
+                </div>`,
+            button: (icon = '', text = '') => `
+                <span type="button" class="btn btn-default" title="${text}">
+                    ${icon}<span class="sr-only">${text}</span>
+                </span>`,
+    };
+    select = $('#id_alignment');
+    selectOptions = select.find('option');
+    element = setEvents(select, $(getTemplate()));
+    select.after(element);
+
+    /**
+     * @method setEvents
+     * @param {jQuery} template
+     * @return {jQuery} template
+     */
+    function setEvents(select, template) {
+        let buttons = template.find('.btn');
+        let options = select.find('option');
+        let index = options.index(options.filter(':selected'));
+
+        buttons.on('click', function (event) {
+            event.preventDefault();
+            // set the value on the select
+            select.find('option')
+                .prop('selected', false)
+                .eq(buttons.index(this))
+                .prop('selected', true);
+            select.trigger('change');
+            // set icon color
+            buttons.find('.icon').removeClass('icon-white');
+            $(this).find('.icon').addClass('icon-white');
+            // set active state of the button
+            buttons.removeClass('active');
+            $(this).addClass('active');
+        });
+
+        // set initial active item
+        buttons.eq(index).trigger('click');
+
+        return template;
+    }
+
+    /**
+     * @method getTemplate
+     * @return {String} template
+     */
+    function getTemplate() {
+        let cls = '';
+
+        select.addClass('hidden');
+
+        if (icons &&
+            icons.length !== selectOptions.length) {
+            throw new Error('Provided icons do not match options.');
+        } else if (icons) {
+            cls = ' bootstrap4-button-group-icons';
+        }
+
+        const buttons = selectOptions.toArray().reduce((btns, selectOption, index) => {
+            let text = $(selectOption).text();
+            let icon;
+
+            // prepare icon
+            if (icons) {
+                icon = iconTemplate(
+                    icons[index],
+                    static_path,
+                    $(selectOption).text(),
+                );
+            } else {
+                icon = text;
+            }
+            // add button
+            btns += templates.button(icon, text);
+
+            return btns;
+        }, '');
+
+        return templates.wrapper(cls, buttons);
+    }
+
+  })(django.jQuery);
+</script>
+{% endblock %}

@@ -17,6 +17,7 @@ from .constants import (
     HIDE_COUNTERS,
     HIDE_RAWHTML,
     HIDE_GATED_CONTENT,
+    HIDE_FLOAT,
     CUSTOM_PLUGINS,
 )
 
@@ -255,10 +256,30 @@ class IncludeExcludeContainer(CMSPluginBase):
         request = context['request']
         url = '%s://%s%s' % (request.scheme, request.META['HTTP_HOST'], request.path)
         is_shown = urlmatch(','.join(instance.include.split('\n')), url) and not urlmatch(','.join(instance.exclude.split('\n')), url)
-        print(request.current_page, request.current_page.get_root(), is_shown)
         context.update({
             'instance': instance,
             'placeholder': placeholder,
             'is_shown': is_shown,
         })
         return context
+
+
+class FloatPlugin(CMSPluginBase):
+    module = 'JumpSuite Componens'
+    name = _('Float Container')
+    model = models.Float
+    form = forms.FloatForm
+    render_template = 'js_components/float.html'
+    change_form_template = 'admin/js_components/float.html'
+    allow_children = True
+
+    def render(self, context, instance, placeholder):
+        context.update({
+            'instance': instance,
+            'placeholder': placeholder,
+            'alignment': instance.alignment,
+        })
+        return context
+
+if not HIDE_FLOAT:
+    plugin_pool.register_plugin(FloatPlugin)

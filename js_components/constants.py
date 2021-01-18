@@ -72,6 +72,11 @@ HIDE_RAWHTML = getattr(
     'COMPONENTS_HIDE_RAWHTML',
     False,
 )
+HIDE_FLOAT = getattr(
+    settings,
+    'COMPONENTS_HIDE_FLOAT',
+    True,
+)
 HIDE_GATED_CONTENT = getattr(
     settings,
     'COMPONENTS_HIDE_GATED_CONTENT',
