@@ -19,6 +19,7 @@ from .constants import (
     HIDE_GATED_CONTENT,
     HIDE_FLOAT,
     CUSTOM_PLUGINS,
+    PROMO_CHILD_CLASSES,
 )
 
 class LayoutMixin():
@@ -52,6 +53,8 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
     model = models.PromoUnit
     form = forms.PromoUnitForm
     render_template = 'js_components/promo.html'
+    allow_children = True if PROMO_CHILD_CLASSES else False
+    child_classes = PROMO_CHILD_CLASSES
 
     main_fields = [
         'layout',

@@ -97,6 +97,11 @@ TWITTER_CACHE_TIMEOUT = getattr(
     'COMPONENTS_TWITTER_CACHE_TIMEOUT',
     60*60*24,
 )
+PROMO_CHILD_CLASSES = getattr(
+    settings,
+    'COMPONENTS_PROMO_CHILD_CLASSES',
+    []
+)
 
 ALL_ANIMATIONS = [
     # Attention seekers
