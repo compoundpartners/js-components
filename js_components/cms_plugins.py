@@ -13,6 +13,7 @@ from .utils.urlmatch import urlmatch
 from .constants import (
     HIDE_PROMO,
     HIDE_PROMO_ROLLOVER,
+    HIDE_PROMO_VIDEO,
     HIDE_TWITTER,
     HIDE_COUNTERS,
     HIDE_RAWHTML,
@@ -64,6 +65,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
         'icon',
         'content',
         'rollover_content',
+        'background_video',
         'link_text',
         'link_url',
         ('file_src', 'show_filesize'),
@@ -71,6 +73,8 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
     ]
     if HIDE_PROMO_ROLLOVER:
         main_fields.remove('rollover_content')
+    if HIDE_PROMO_VIDEO:
+        main_fields.remove('background_video')
 
     fieldsets = [
         (None, {

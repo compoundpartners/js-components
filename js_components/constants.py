@@ -12,6 +12,11 @@ HIDE_PROMO_ROLLOVER = getattr(
     'COMPONENTS_HIDE_PROMO_ROLLOVER',
     True,
 )
+HIDE_PROMO_VIDEO = getattr(
+    settings,
+    'COMPONENTS_HIDE_PROMO_VIDEO',
+    True,
+)
 PROMO_LAYOUTS = getattr(
     settings,
     'COMPONENTS_PROMO_LAYOUTS',

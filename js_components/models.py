@@ -92,6 +92,12 @@ class PromoUnit(CMSPlugin):
         default='',
         blank=True
     )
+    background_video = models.CharField(
+        max_length=255,
+        verbose_name=_('Background Video'),
+        null=True,
+        blank=True,
+    )
     link_url = models.CharField(
         max_length=255,
         blank=True,
