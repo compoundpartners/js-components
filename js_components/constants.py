@@ -82,6 +82,16 @@ HIDE_FLOAT = getattr(
     'COMPONENTS_HIDE_FLOAT',
     True,
 )
+HIDE_LIGHTBOX = getattr(
+    settings,
+    'COMPONENTS_HIDE_LIGHTBOX',
+    True,
+)
+LIGHTBOX_LAYOUTS = getattr(
+    settings,
+    'COMPONENTS_LIGHTBOX_LAYOUTS',
+    (),
+)
 HIDE_GATED_CONTENT = getattr(
     settings,
     'COMPONENTS_HIDE_GATED_CONTENT',

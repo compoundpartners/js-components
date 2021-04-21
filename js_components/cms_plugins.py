@@ -19,6 +19,7 @@ from .constants import (
     HIDE_RAWHTML,
     HIDE_GATED_CONTENT,
     HIDE_FLOAT,
+    HIDE_LIGHTBOX,
     CUSTOM_PLUGINS,
     PROMO_CHILD_CLASSES,
 )
@@ -290,3 +291,17 @@ class FloatPlugin(CMSPluginBase):
 
 if not HIDE_FLOAT:
     plugin_pool.register_plugin(FloatPlugin)
+
+
+class LightboxPlugin(LayoutMixin, CMSPluginBase):
+    module = 'JumpSuite Componens'
+    TEMPLATE_NAME = 'js_components/lightbox_%s.html'
+    name = _('Lightbox')
+    model = models.Lightbox
+    form = forms.LightboxForm
+    render_template = 'js_components/lightbox.html'
+    allow_children = True
+    child_classes = ['Bootstrap4PicturePlugin']
+
+if not HIDE_LIGHTBOX:
+    plugin_pool.register_plugin(LightboxPlugin)

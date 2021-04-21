@@ -467,6 +467,12 @@ class Folder(CMSPlugin):
 
 @python_2_unicode_compatible
 class IncludeExcludeContainer(CMSPlugin):
+    title = models.CharField(
+        max_length=255,
+        verbose_name=_('title'),
+        default='',
+        blank=True
+    )
     include = models.TextField(
         verbose_name=_('Show on these pages'),
         blank=True,
@@ -479,7 +485,7 @@ class IncludeExcludeContainer(CMSPlugin):
         default='',
     )
     def __str__(self):
-        return str(self.pk)
+        return self.title or str(self.pk)
 
 
 @python_2_unicode_compatible
@@ -490,5 +496,29 @@ class Float(CMSPlugin):
         blank=True,
         max_length=255,
     )
+
     def __str__(self):
         return str(self.pk)
+
+
+@python_2_unicode_compatible
+class Lightbox(CMSPlugin):
+    layout = models.CharField(
+        blank=True,
+        default='',
+        max_length=60,
+        verbose_name=_('layout'),
+    )
+    title = models.CharField(
+        max_length=255,
+        verbose_name=_('title'),
+        default='',
+        blank=True
+    )
+    show_title = models.BooleanField(
+        default=False,
+        verbose_name=_('Show Title')
+    )
+
+    def __str__(self):
+        return self.title or str(self.pk)

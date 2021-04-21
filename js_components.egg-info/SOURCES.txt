@@ -45,6 +45,7 @@ js_components/migrations/0027_custom_custom_fields.py
 js_components/migrations/0028_auto_20201014_1259.py
 js_components/migrations/0029_float.py
 js_components/migrations/0030_promounit_background_video.py
+js_components/migrations/0031_auto_20210319_1303.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
@@ -68,6 +69,7 @@ js_components/templates/js_components/float.html
 js_components/templates/js_components/folder.html
 js_components/templates/js_components/gated_content.html
 js_components/templates/js_components/html.html
+js_components/templates/js_components/lightbox.html
 js_components/templates/js_components/promo.html
 js_components/templates/js_components/twitter.html
 js_components/utils/__init__.py

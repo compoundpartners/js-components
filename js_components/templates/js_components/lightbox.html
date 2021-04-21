@@ -1,0 +1,9 @@
+{% load cms_tags %}
+
+<div>
+  {% if instance.show_title %}{{ instance.title }}{% endif %}
+
+  {% for plugin in instance.child_plugin_instances %}
+      {% render_plugin plugin %}
+  {% endfor %}
+</div>

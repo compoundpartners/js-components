@@ -9,6 +9,7 @@ from .constants import (
     COUNTERS_LAYOUTS,
     CUSTOM_LAYOUTS,
     GATED_CONTENT_LAYOUTS,
+    LIGHTBOX_LAYOUTS,
     ANIMATIONS,
     CUSTOM_PLUGINS,
 )
@@ -38,6 +39,8 @@ COUNTERS_LAYOUT_CHOICES = get_choices(COUNTERS_LAYOUTS)
 CUSTOM_LAYOUT_CHOICES = get_choices(CUSTOM_LAYOUTS)
 
 GATED_CONTENT_LAYOUT_CHOICES = get_choices(GATED_CONTENT_LAYOUTS)
+
+LIGHTBOX_LAYOUT_CHOICES = get_choices(LIGHTBOX_LAYOUTS)
 
 ANIMATION_CHOICES = zip(ANIMATIONS, ANIMATIONS)
 
@@ -149,6 +152,15 @@ class GatedContentForm(forms.ModelForm):
     class Meta:
         model = models.Custom
         fields = ['layout']
+
+
+class LightboxForm(forms.ModelForm):
+
+    layout = forms.ChoiceField(choices=LIGHTBOX_LAYOUT_CHOICES, required=False)
+
+    class Meta:
+        model = models.Lightbox
+        fields = '__all__'
 
 
 class AnimateForm(forms.ModelForm):
