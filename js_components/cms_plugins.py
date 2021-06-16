@@ -62,6 +62,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
         'layout',
         'title',
         'subtitle',
+        'color',
         'image',
         'icon',
         'content',

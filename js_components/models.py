@@ -17,6 +17,7 @@ from twython import Twython, TwythonError
 from dateutil.parser import parse
 from filer.models.filemodels import File
 from djangocms_attributes_field import fields
+from js_color_picker.fields import RGBColorField
 
 
 from .constants import (
@@ -128,6 +129,11 @@ class PromoUnit(CMSPlugin):
         max_length=60,
         verbose_name=_('Modal Id'),
         help_text=_('Do not include a preceding "#" symbol.'),
+    )
+    color = RGBColorField(
+        verbose_name=_('Color'),
+        blank=True,
+        null=True
     )
     attributes = AttributesField()
 
