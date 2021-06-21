@@ -64,6 +64,13 @@ class PromoUnit(CMSPlugin):
         on_delete=models.SET_NULL,
         related_name='+',
     )
+    svg = FilerFileField(
+        verbose_name=_('SVG Image'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
     file_src = FilerFileField(
         verbose_name=_('File'),
         blank=True,

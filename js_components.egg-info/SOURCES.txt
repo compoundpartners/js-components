@@ -47,6 +47,7 @@ js_components/migrations/0029_float.py
 js_components/migrations/0030_promounit_background_video.py
 js_components/migrations/0031_auto_20210319_1303.py
 js_components/migrations/0032_promounit_color.py
+js_components/migrations/0033_auto_20210616_0546.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
