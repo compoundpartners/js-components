@@ -48,6 +48,7 @@ js_components/migrations/0030_promounit_background_video.py
 js_components/migrations/0031_auto_20210319_1303.py
 js_components/migrations/0032_promounit_color.py
 js_components/migrations/0033_auto_20210616_0546.py
+js_components/migrations/0034_auto_20210621_1515.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
@@ -68,6 +69,7 @@ js_components/templates/js_components/counter.html
 js_components/templates/js_components/counters.html
 js_components/templates/js_components/custom.html
 js_components/templates/js_components/float.html
+js_components/templates/js_components/float_xxx.html
 js_components/templates/js_components/folder.html
 js_components/templates/js_components/gated_content.html
 js_components/templates/js_components/html.html

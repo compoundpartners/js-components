@@ -1,5 +1,5 @@
 {% load cms_tags %}
-<div{% if alignment %} style="float: alignment;"{% endif %}>
+<div{% if alignment %} style="float: {{ alignment }};"{% endif %}>
   {% for plugin in instance.child_plugin_instances %}
       {% render_plugin plugin %}
   {% endfor %}

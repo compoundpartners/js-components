@@ -102,6 +102,11 @@ GATED_CONTENT_LAYOUTS = getattr(
     'COMPONENTS_GATED_CONTENT_LAYOUTS',
     (),
 )
+FLOAT_LAYOUTS = getattr(
+    settings,
+    'COMPONENTS_FLOAT_LAYOUTS',
+    (),
+)
 TWYTHON_KWARGS = getattr(
     settings,
     'COMPONENTS_TWYTHON_KWARGS',

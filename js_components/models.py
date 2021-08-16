@@ -395,6 +395,12 @@ class GatedContent(CMSPlugin):
         max_length=60,
         verbose_name=_('layout')
     )
+    cookie_name = models.SlugField(
+        blank=True,
+        default='',
+        max_length=255,
+        verbose_name=_('cookie name')
+    )
 
     def __str__(self):
         return str(self.pk)

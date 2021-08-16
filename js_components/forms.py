@@ -12,6 +12,7 @@ from .constants import (
     LIGHTBOX_LAYOUTS,
     ANIMATIONS,
     CUSTOM_PLUGINS,
+    FLOAT_LAYOUTS,
 )
 
 try:
@@ -40,6 +41,8 @@ CUSTOM_LAYOUT_CHOICES = get_choices(CUSTOM_LAYOUTS)
 
 GATED_CONTENT_LAYOUT_CHOICES = get_choices(GATED_CONTENT_LAYOUTS)
 
+FLOAT_LAYOUT_CHOICES = get_choices(FLOAT_LAYOUTS, add_default=False)
+
 LIGHTBOX_LAYOUT_CHOICES = get_choices(LIGHTBOX_LAYOUTS)
 
 ANIMATION_CHOICES = zip(ANIMATIONS, ANIMATIONS)
@@ -57,7 +60,7 @@ FLOAT_CHOICES = (
   ('left', 'Left'),
   ('center', 'Center'),
   ('right', 'Right'),
-)
+) + tuple(FLOAT_LAYOUT_CHOICES)
 
 
 class PromoUnitForm(forms.ModelForm):
@@ -150,8 +153,8 @@ class GatedContentForm(forms.ModelForm):
     layout = forms.ChoiceField(choices=GATED_CONTENT_LAYOUT_CHOICES, required=False)
 
     class Meta:
-        model = models.Custom
-        fields = ['layout']
+        model = models.GatedContent
+        fields = ['layout', 'cookie_name']
 
 
 class LightboxForm(forms.ModelForm):

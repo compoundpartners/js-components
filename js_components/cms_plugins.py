@@ -274,14 +274,18 @@ class IncludeExcludeContainer(CMSPluginBase):
         return context
 
 
-class FloatPlugin(CMSPluginBase):
+class FloatPlugin(LayoutMixin, CMSPluginBase):
     module = 'JumpSuite Componens'
     name = _('Float Container')
     model = models.Float
     form = forms.FloatForm
     render_template = 'js_components/float.html'
-    change_form_template = 'admin/js_components/float.html'
+    TEMPLATE_NAME = 'js_components/float_%s.html'
+    #change_form_template = 'admin/js_components/float.html'
     allow_children = True
+
+    def get_layout(self, context, instance, placeholder):
+        return '' if instance.alignment in ['left', 'right', 'center'] else instance.alignment
 
     def render(self, context, instance, placeholder):
         context.update({
