@@ -73,6 +73,7 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
         'link_url',
         ('file_src', 'show_filesize'),
         'open_in_new_window',
+        'full_height',
     ]
     if HIDE_PROMO_ROLLOVER:
         main_fields.remove('rollover_content')

@@ -142,6 +142,10 @@ class PromoUnit(CMSPlugin):
         blank=True,
         null=True
     )
+    full_height = models.BooleanField(
+        default=True,
+        verbose_name=_('Full Height')
+    )
     attributes = AttributesField()
 
     def __str__(self):
