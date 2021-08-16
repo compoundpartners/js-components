@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='promounit',
             name='full_height',
-            field=models.BooleanField(default=True, verbose_name='Full Height'),
+            field=models.BooleanField(default=False, verbose_name='Full Height'),
         ),
     ]
