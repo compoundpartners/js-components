@@ -50,9 +50,11 @@ js_components/migrations/0032_promounit_color.py
 js_components/migrations/0033_auto_20210616_0546.py
 js_components/migrations/0034_auto_20210621_1515.py
 js_components/migrations/0035_auto_20210816_1052.py
+js_components/migrations/0036_auto_20210915_1124.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js
+js_components/static/countUp.min.js
 js_components/static/jquery.appear.js
 js_components/static/animate.css/LICENSE
 js_components/static/animate.css/README.md

@@ -456,7 +456,7 @@ class Folder(CMSPlugin):
         verbose_name=_('layout'),
     )
     title = models.CharField(
-        max_length=60,
+        max_length=255,
         verbose_name=_('title'),
         default='',
         blank=True
