@@ -55,11 +55,13 @@ class PromoUnitPlugin(LayoutMixin, CMSPluginBase):
     model = models.PromoUnit
     form = forms.PromoUnitForm
     render_template = 'js_components/promo.html'
+    change_form_template = 'admin/js_components/float.html'
     allow_children = True if PROMO_CHILD_CLASSES else False
     child_classes = PROMO_CHILD_CLASSES
 
     main_fields = [
         'layout',
+        'alignment',
         'title',
         'subtitle',
         'color',

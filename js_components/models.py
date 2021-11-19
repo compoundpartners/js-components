@@ -124,6 +124,12 @@ class PromoUnit(CMSPlugin):
         default=True,
         verbose_name=_('Show Filesize')
     )
+    alignment = models.CharField(
+        verbose_name=_('Alignment'),
+        default='',
+        blank=True,
+        max_length=255,
+    )
     layout = models.CharField(
         blank=True,
         default='',

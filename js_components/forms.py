@@ -55,16 +55,19 @@ ORDER_BY_CHOICES = (
   ('original_filename', 'File Name'),
 )
 
-FLOAT_CHOICES = (
+ALIGNMENT_CHOICES = (
   ('', '--------'),
   ('left', 'Left'),
   ('center', 'Center'),
   ('right', 'Right'),
-) + tuple(FLOAT_LAYOUT_CHOICES)
+)
+
+FLOAT_CHOICES = ALIGNMENT_CHOICES + tuple(FLOAT_LAYOUT_CHOICES)
 
 
 class PromoUnitForm(forms.ModelForm):
 
+    alignment = forms.ChoiceField(choices=ALIGNMENT_CHOICES, required=False)
     layout = forms.ChoiceField(choices=PROMO_LAYOUT_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
