@@ -51,8 +51,11 @@ ANIMATION_CHOICES = zip(ANIMATIONS, ANIMATIONS)
 ORDER_BY_CHOICES = (
   ('', '--------'),
   ('uploaded_at', 'Date'),
+  ('-uploaded_at', 'Date descending'),
   ('name', 'Name'),
+  ('-name', 'Name descending'),
   ('original_filename', 'File Name'),
+  ('-original_filename', 'File Name descending'),
 )
 
 ALIGNMENT_CHOICES = (

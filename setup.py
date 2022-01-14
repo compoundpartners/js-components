@@ -8,7 +8,6 @@ REQUIREMENTS = [
     'django-friendly-tag-loader==1.3.1',
     'djangocms-attributes-field>=0.1.1',
     'djangocms-text-ckeditor>=3.1.0',
-    'djangocms-icon>=1.0.0',
     'twython==3.7.0',
     'python-dateutil',
 ]

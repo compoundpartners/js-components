@@ -12,15 +12,15 @@
 {{ block.super }}
 <script>
   (function($) {
-
-    iconTemplate = (icon, staticPath = '{% static '' %}', title = '') => `
+    {% get_static_prefix as static_prefix %}
+    iconTemplate = (icon, staticPath = '{{ static_prefix }}', title = '') => `
         <span class="icon icon-${icon}" title="${title}">
             <svg role="presentation">
                 <use xlink:href="${staticPath}djangocms_bootstrap4/sprites/icons.svg#${icon}"></use>
             </svg>
         </span>`
 
-    static_path = '{% static '' %}';
+    static_path = '{{ static_prefix }}';
     icons = ["align-reset","flex-content-start","flex-content-center","flex-content-end"];
     templates = {
             wrapper: (cls = '', buttons = '') => `
