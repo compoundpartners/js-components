@@ -160,7 +160,7 @@ class GatedContentForm(forms.ModelForm):
 
     class Meta:
         model = models.GatedContent
-        fields = ['layout', 'cookie_name']
+        fields = ['layout', 'link_url', 'cookie_name']
 
 
 class LightboxForm(forms.ModelForm):

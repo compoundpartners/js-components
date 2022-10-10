@@ -405,6 +405,11 @@ class GatedContent(CMSPlugin):
         max_length=60,
         verbose_name=_('layout')
     )
+    link_url = models.CharField(
+        max_length=255,
+        blank=True,
+        verbose_name=_('Link URL')
+    )
     cookie_name = models.SlugField(
         blank=True,
         default='',
