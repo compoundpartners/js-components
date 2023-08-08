@@ -22,6 +22,7 @@ from .constants import (
     HIDE_LIGHTBOX,
     CUSTOM_PLUGINS,
     PROMO_CHILD_CLASSES,
+    LIGHTBOX_CHILD_CLASSES,
 )
 
 class LayoutMixin():
@@ -310,7 +311,7 @@ class LightboxPlugin(LayoutMixin, CMSPluginBase):
     form = forms.LightboxForm
     render_template = 'js_components/lightbox.html'
     allow_children = True
-    child_classes = ['Bootstrap4PicturePlugin']
+    child_classes = LIGHTBOX_CHILD_CLASSES
 
 if not HIDE_LIGHTBOX:
     plugin_pool.register_plugin(LightboxPlugin)

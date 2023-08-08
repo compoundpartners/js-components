@@ -53,6 +53,7 @@ js_components/migrations/0035_auto_20210816_1052.py
 js_components/migrations/0036_auto_20210915_1124.py
 js_components/migrations/0037_auto_20211119_1145.py
 js_components/migrations/0038_auto_20221010_1033.py
+js_components/migrations/0039_auto_20230214_1243.py
 js_components/migrations/__init__.py
 js_components/static/animate.js
 js_components/static/countUp.js

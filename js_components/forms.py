@@ -14,10 +14,14 @@ from .constants import (
     CUSTOM_PLUGINS,
     FLOAT_LAYOUTS,
 )
+try:
+    from djangocms_attributes_field.fields import AttributesFormField
+except ImportError:
+    AttributesFormField = forms.CharField
 
 try:
     from js_custom_fields.forms import CustomFieldsFormMixin
-except:
+except ImportError:
     class CustomFieldsFormMixin(object):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, **kwargs)
@@ -139,9 +143,11 @@ class CustomForm(CustomFieldsFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['layout'].choices = self.get_layouts()
+        if not self.get_custom_fields():
+            self.fields['custom_fields'] = AttributesFormField(required=False)
 
-    def get_custom_fields(self):
-        return {}
+    # def get_custom_fields(self):
+        # return {}
 
     def get_layouts(self):
         if self.plugin_name:

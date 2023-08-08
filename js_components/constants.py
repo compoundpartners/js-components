@@ -122,6 +122,14 @@ PROMO_CHILD_CLASSES = getattr(
     'COMPONENTS_PROMO_CHILD_CLASSES',
     []
 )
+LIGHTBOX_CHILD_CLASSES = getattr(
+    settings,
+    'COMPONENTS_LIGHTBOX_CHILD_CLASSES',
+    [
+        'Bootstrap4PicturePlugin',
+        'ImagePlugin',
+    ]
+)
 
 ALL_ANIMATIONS = [
     # Attention seekers

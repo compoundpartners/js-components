@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 from cms.models.pluginmodel import CMSPlugin
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.core.cache import cache
 from django.contrib.postgres.fields import JSONField
@@ -50,7 +49,7 @@ class FilerVideoField(FilerFileField):
     default_model_class = Video
 
 
-@python_2_unicode_compatible
+
 class PromoUnit(CMSPlugin):
     icon = Icon(
         verbose_name=_('Icon'),
@@ -158,7 +157,7 @@ class PromoUnit(CMSPlugin):
         return self.title or str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class TwitterFeed(CMSPlugin):
     title = models.CharField(
         max_length=255,
@@ -291,7 +290,7 @@ class TweetCache(models.Model):
 
 
 #need to remove
-@python_2_unicode_compatible
+
 class CountersContainer(CMSPlugin):
     layout = models.CharField(
         blank=True,
@@ -303,7 +302,7 @@ class CountersContainer(CMSPlugin):
         return str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class Counter(CMSPlugin):
     body = models.CharField(
         _('Title'),
@@ -356,7 +355,7 @@ class Counter(CMSPlugin):
         return str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class RawHTML(CMSPlugin):
     body = models.TextField(
         _('HTML body')
@@ -366,7 +365,7 @@ class RawHTML(CMSPlugin):
         return str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class RawHTMLWithID(CMSPlugin):
     body = models.TextField(
         _('HTML body')
@@ -383,7 +382,7 @@ class RawHTMLWithID(CMSPlugin):
         return self.parameters
 
 
-@python_2_unicode_compatible
+
 class Custom(CMSPlugin):
     layout = models.CharField(
         blank=True,
@@ -397,7 +396,7 @@ class Custom(CMSPlugin):
         return str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class GatedContent(CMSPlugin):
     layout = models.CharField(
         blank=True,
@@ -421,7 +420,7 @@ class GatedContent(CMSPlugin):
         return str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class Animate(CMSPlugin):
     layout = models.CharField(
         blank=True,
@@ -458,7 +457,7 @@ class Animate(CMSPlugin):
         return self.animation
 
 
-@python_2_unicode_compatible
+
 class Folder(CMSPlugin):
     layout = models.CharField(
         blank=True,
@@ -499,7 +498,7 @@ class Folder(CMSPlugin):
         return self.title
 
 
-@python_2_unicode_compatible
+
 class IncludeExcludeContainer(CMSPlugin):
     title = models.CharField(
         max_length=255,
@@ -522,7 +521,7 @@ class IncludeExcludeContainer(CMSPlugin):
         return self.title or str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class Float(CMSPlugin):
     alignment = models.CharField(
         verbose_name=_('Alignment'),
@@ -535,7 +534,7 @@ class Float(CMSPlugin):
         return str(self.pk)
 
 
-@python_2_unicode_compatible
+
 class Lightbox(CMSPlugin):
     layout = models.CharField(
         blank=True,
@@ -552,6 +551,11 @@ class Lightbox(CMSPlugin):
     show_title = models.BooleanField(
         default=False,
         verbose_name=_('Show Title')
+    )
+    max_visible_images = models.PositiveSmallIntegerField(
+        verbose_name=_('max visible images'),
+        default=0,
+        blank=True
     )
 
     def __str__(self):
