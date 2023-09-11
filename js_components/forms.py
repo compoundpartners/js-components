@@ -84,8 +84,7 @@ class PromoUnitForm(forms.ModelForm):
 
     class Meta:
         model = models.PromoUnit
-        fields = ['icon', 'image', 'file_src', 'title', 'subtitle', 'content',
-            'link_url', 'link_text', 'open_in_new_window', 'layout']
+        fields = '__all__'
 
 
 class TwitterFeedForm(forms.ModelForm):
@@ -99,7 +98,7 @@ class TwitterFeedForm(forms.ModelForm):
 
     class Meta:
         model = models.TwitterFeed
-        fields = ['title', 'username', 'count', 'image', 'layout']
+        fields = '__all__'
 
 
 class CountersContainerForm(forms.ModelForm):
@@ -113,7 +112,7 @@ class CountersContainerForm(forms.ModelForm):
 
     class Meta:
         model = models.CountersContainer
-        fields = ['layout']
+        fields = '__all__'
 
 class CounterForm(forms.ModelForm):
 
