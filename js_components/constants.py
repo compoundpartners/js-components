@@ -2,6 +2,9 @@
 
 from django.conf import settings
 
+ICON_ENABLE_COLOR = getattr(settings, 'COMPONENTS_ICON_ENABLE_COLOR', None)
+ICON_ENABLE_SIZE = getattr(settings, 'COMPONENTS_ICON_ENABLE_SIZE', None)
+
 HIDE_PROMO = getattr(
     settings,
     'COMPONENTS_HIDE_PROMO',

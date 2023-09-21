@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django import forms
 from django.utils.text import slugify
+from djangocms_icon.fields import IconFieldWidget
 from . import models
 from .constants import (
     PROMO_LAYOUTS,
@@ -13,6 +14,8 @@ from .constants import (
     ANIMATIONS,
     CUSTOM_PLUGINS,
     FLOAT_LAYOUTS,
+    ICON_ENABLE_COLOR,
+    ICON_ENABLE_SIZE,
 )
 try:
     from djangocms_attributes_field.fields import AttributesFormField
@@ -81,6 +84,7 @@ class PromoUnitForm(forms.ModelForm):
         super(PromoUnitForm, self).__init__(*args, **kwargs)
         if len(PROMO_LAYOUTS) == 0:
             self.fields['layout'].widget = forms.HiddenInput()
+        self.fields['icon'].widget = IconFieldWidget(enable_color=ICON_ENABLE_COLOR, enable_size=ICON_ENABLE_SIZE)
 
     class Meta:
         model = models.PromoUnit
