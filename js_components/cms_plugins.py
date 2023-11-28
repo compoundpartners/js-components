@@ -23,6 +23,7 @@ from .constants import (
     CUSTOM_PLUGINS,
     PROMO_CHILD_CLASSES,
     LIGHTBOX_CHILD_CLASSES,
+    HIDE_CUSTOM,
 )
 
 class LayoutMixin():
@@ -184,7 +185,7 @@ if not HIDE_RAWHTML:
 
 
 
-@plugin_pool.register_plugin
+
 class CustomPlugin(LayoutMixin, CMSPluginBase):
     module = 'JumpSuite Componens'
     TEMPLATE_NAME = 'js_components/custom_%s.html'
@@ -199,13 +200,16 @@ class CustomPlugin(LayoutMixin, CMSPluginBase):
             Form.plugin_name=self.name
         return Form
 
-for name, parameters in CUSTOM_PLUGINS.items():
-    p = type(
-        str(name.replace(' ', '') + 'Plugin'),
-        (CustomPlugin,),
-        {'name': name},
-    )
-    plugin_pool.register_plugin(p)
+if not HIDE_CUSTOM:
+    plugin_pool.register_plugin(CustomPlugin)
+    for name, parameters in CUSTOM_PLUGINS.items():
+        p = type(
+            str(name.replace(' ', '') + 'Plugin'),
+            (CustomPlugin,),
+            {'name': name},
+        )
+        plugin_pool.register_plugin(p)
+    
 
 
 class GatedContentPlugin(LayoutMixin, CMSPluginBase):

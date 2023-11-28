@@ -40,6 +40,9 @@ class Form(forms.BaseForm):
     hide_lightbox = forms.CheckboxField(
         'Hide Lightbox plugin', required=False, initial=True
     )
+    hide_custom = forms.CheckboxField(
+        'Hide Custom plugin', required=False, initial=True
+    )
 
     def to_settings(self, data, settings):
         settings['COMPONENTS_HIDE_PROMO'] = int(data['hide_promo'])
@@ -59,4 +62,5 @@ class Form(forms.BaseForm):
         settings['COMPONENTS_HIDE_GATED_CONTENT'] = int(data['hide_gated_content'])
         settings['COMPONENTS_HIDE_FLOAT'] = int(data['hide_float'])
         settings['COMPONENTS_HIDE_LIGHTBOX'] = int(data['hide_lightbox'])
+        settings['COMPONENTS_HIDE_CUSTOM'] = int(data['hide_custom'])
         return settings
